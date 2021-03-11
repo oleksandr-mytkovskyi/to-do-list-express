@@ -1,170 +1,163 @@
 const db = require("../models");
 const List = db.list;
-// const Op = db.Sequelize.Op;
-let timerDelete = null;
+let timerDelete = new Map();
 
-exports.add = (req, res) => {
-  // Create a List
-  const list = {
-    name: req.body.name,
-    status: req.body.status,
-    isDeleted: req.body.isDeleted,
-    deteteData: req.body.deteteData,
-  };
-
-  // Save List in the database
-    List.create(list)
-        .then(data => {
-            res.send(data);
-        })
-        .catch(err => {
-            res.status(500).send({
-                message:
-                    err.message || "Some error occurred while creating the List."
-            });
+exports.add = async (req, res) => {
+    // Create a List
+    const list = {
+        name: req.body.name,
+        status: req.body.status,
+        isDeleted: req.body.isDeleted,
+        deteteData: req.body.deteteData,
+    };
+    try {
+        const data = await List.create(list);
+        res.send(data);
+    } catch (e) {
+        res.status(500).send({
+            message: e.message || "Some error occurred while creating the List."
         });
+    }
 }
 
-exports.get = (req, res, query) => {
-    const {limit, offset} = query;
-    List.findAll({
-        attributes: ['id', 'name', 'status', 'updatedAt', 'createdAt' ],
-        where: {isDeleted: false},
-        order: [
-            ['id', 'ASC'],
-        ],
-        limit: limit,
-        offset: offset,
-    })
-    .then(data => {
-      res.send(data);
-    })
-    .catch(err => {
-      res.status(500).send({
-        message:
-          err.message || "Some error occurred while retrieving Lists."
-      });
-    });
-}
-
-exports.getById = (req, res, id) => {
-    List.findAll({
-        attributes: ['id', 'name', 'status', 'updatedAt', 'createdAt' ],
-        where: {id: id, isDeleted: false}
-    })
-    .then(data => {
-      res.send(data[0]);
-    })
-    .catch(err => {
-      res.status(500).send({
-        message:
-          err.message || "Some error occurred while retrieving Lists."
-      });
-    });
-}
-
-exports.updata = (req, res, id) => {
-    List.update(req.body, {
-        where: { id: id }
-    })
-        .then(num => {
-            if (num == 1) {
-                res.send({
-                    message: "List was updated successfully.",
-                    id: id
-                });
-            } else {
-                res.send({
-                    message: `Cannot update List with id=${id}. Maybe List was not found or req.body is empty!`
-                });
-            }
-        })
-        .catch(err => {
-            res.status(500).send({
-                message: "Error updating List with id=" + id
-            });
+exports.get = async (req, res, query) => {
+    try {
+        const { limit, offset } = query;
+        const data = await List.findAll({
+            attributes: ['id', 'name', 'status', 'updatedAt', 'createdAt'],
+            where: { isDeleted: false },
+            order: [
+                ['id', 'ASC'],
+            ],
+            limit: limit,
+            offset: offset,
         });
+        res.send(data);
+    } catch (e) {
+        res.status(500).send({
+            message: e.message || "Some error occurred while retrieving Lists."
+          });
+    }
 }
 
-exports.delete = (req, res, id) => {
-    List.destroy({
-        where: { id: id }
-    })
-        .then(num => {
-            if (num == 1) {
-                res.send({
-                    message: "List was deleted successfully!",
-                    id: id
-                });
-            } else {
-                res.send({
-                    message: `Cannot delete List with id=${id}. Maybe List was not found!`
-                });
-            }
-        })
-        .catch(err => {
-            res.status(500).send({
-                message: "Could not delete List with id=" + id
-            });
+exports.getById = async (req, res, id) => {
+    try {
+        const data = await List.findAll({
+            attributes: ['id2', 'name', 'status', 'updatedAt', 'createdAt'],
+            where: { id: id, isDeleted: false }
         });
+        res.send(data[0]);
+    } catch (e) {
+        res.status(500).send({
+            message: e.message || "Some error occurred while retrieving Lists."
+          });
+    }
 }
 
-exports.addToTrash = (req, res, id) => {
-    const data = {
+exports.updata = async (req, res, id) => {
+    try {
+        const data = await List.update(req.body, {
+            where: { id: id }
+        });
+        if (data != 1) {
+            res.status(500).send({
+                message: `Cannot update List with id=${id}. Maybe List was not found or req.body is empty!`
+            });
+            return;
+        }
+        res.send({
+            message: "List was updated successfully.",
+            id: id
+        })
+    } catch (e) {
+        res.status(500).send({
+            message: e.message || "Error updating List with id=" + id
+        });
+    }
+}
+
+
+exports.delete = async (req, res, id) => {
+    try {
+        const data = await List.destroy({
+            where: { id: id }
+        });
+        if (data != 1) {
+            res.status(500).send({
+                message: `Cannot delete List with id=${id}. Maybe List was not found!`
+            });
+            return;
+        }
+        res.send({
+            message: "List was deleted successfully!",
+            id: id
+        });
+    } catch (e) {
+        res.status(500).send({
+            message: e.message || "Could not delete List with id=" + id
+        });
+    }
+}
+
+exports.addToTrash = async (req, res, id) => {
+    const postData = {
         isDeleted: true,
         deleteData: new Date().toISOString(),
     };
-    List.update(data, {
-        where: { id: id }
-    })
-        .then(num => {
-            if (num == 1) {
-                res.send({
-                    message: "List was deleted successfully!",
-                    id: id
-                });
-                timerDelete = setTimeout(() => {
-                    this.delete(req, res, id);
-                }, 60000);
-            } else {
-                res.send({
-                    message: `Cannot delete List with id=${id}. Maybe List was not found!`
-                });
-            }
-        })
-        .catch(err => {
-            res.status(500).send({
-                message: "Could not delete List with id=" + id
-            });
+    try {
+        const data = await List.update(postData, {
+            where: { id: id }
         });
-
+        if (data != 1) {
+            res.status(500).send({
+                message: `Cannot delete List with id=${id}. Maybe List was not found!`
+            });
+            return;
+        }
+        res.send({
+            message: "List was deleted successfully!",
+            id: id
+        });
+        let timerId = setTimeout(() => {
+            this.delete(req, res, id);
+        }, 60000);
+        timerDelete.set(id, timerId);
+    } catch (e) {
+        res.status(500).send({
+            message: e.message || "Could not delete List with id=" + id
+        });
+    }
 }
 
-exports.removeToTrash = (req, res, id) => {
-    clearTimeout(timerDelete);
-    const data = {
+exports.removeToTrash = async (req, res, id) => {
+    clearTimeout(timerDelete.get(id));
+    timerDelete.delete(id);
+    const postData = {
         isDeleted: false,
         deleteData: null,
     };
-    List.update(data, {
-        where: { id: id }
-    })
-        .then(num => {
-            if (num == 1) {
-                res.send({
-                    message: "List was recovery successfully!",
-                    id: id
-                });
-            } else {
-                res.send({
-                    message: `Cannot recovery List with id=${id}. Maybe List was not found!`
-                });
-            }
-        })
-        .catch(err => {
-            res.status(500).send({
-                message: "Could not recovery List with id=" + id
-            });
+    try {
+        const data = await List.update(postData, {
+            where: { id: id }
         });
+        if (data != 1) {
+            res.status(500).send({
+                message: `Cannot recovery List with id=${id}. Maybe List was not found!`
+            });
+            return;
+        }
+        res.send({
+            message: "List was recovery successfully!",
+            id: id
+        });
+        let timerId = setTimeout(() => {
+            this.delete(req, res, id);
+        }, 60000);
+        timerDelete.set(id, timerId);
+    } catch (e) {
+        res.status(500).send({
+            message: e.message || "Could not recovery List with id=" + id
+        });
+    }
 }
 
