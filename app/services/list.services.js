@@ -1,14 +1,15 @@
 const db = require("../models");
 const List = db.list;
-const Op = db.Sequelize.Op;
+// const Op = db.Sequelize.Op;
+let timerDelete = null;
 
 exports.add = (req, res) => {
   // Create a List
   const list = {
     name: req.body.name,
     status: req.body.status,
-    create_data: req.body.create_data,
-    updata_data: req.body.updata_data,
+    isDeleted: req.body.isDeleted,
+    deteteData: req.body.deteteData,
   };
 
   // Save List in the database
@@ -25,7 +26,10 @@ exports.add = (req, res) => {
 }
 
 exports.get = (req, res) => {
-    List.findAll()
+    List.findAll({
+        attributes: ['id', 'name', 'status', 'updatedAt', 'createdAt' ],
+        where: {isDeleted: false}
+    })
     .then(data => {
       res.send(data);
     })
@@ -39,10 +43,11 @@ exports.get = (req, res) => {
 
 exports.getById = (req, res, id) => {
     List.findAll({
-        where: {id: id}
+        attributes: ['id', 'name', 'status', 'updatedAt', 'createdAt' ],
+        where: {id: id, isDeleted: false}
     })
     .then(data => {
-      res.send(data);
+      res.send(data[0]);
     })
     .catch(err => {
       res.status(500).send({
@@ -94,6 +99,65 @@ exports.delete = (req, res, id) => {
         .catch(err => {
             res.status(500).send({
                 message: "Could not delete List with id=" + id
+            });
+        });
+}
+
+exports.addToTrash = (req, res, id) => {
+    const data = {
+        isDeleted: true,
+        deleteData: new Date().toISOString(),
+    };
+    List.update(data, {
+        where: { id: id }
+    })
+        .then(num => {
+            if (num == 1) {
+                res.send({
+                    message: "List was deleted successfully!",
+                    id: id
+                });
+                timerDelete = setTimeout(() => {
+                    this.delete(req, res, id);
+                }, 60000);
+            } else {
+                res.send({
+                    message: `Cannot delete List with id=${id}. Maybe List was not found!`
+                });
+            }
+        })
+        .catch(err => {
+            res.status(500).send({
+                message: "Could not delete List with id=" + id
+            });
+        });
+
+}
+
+exports.removeToTrash = (req, res, id) => {
+    clearTimeout(timerDelete);
+    const data = {
+        isDeleted: false,
+        deleteData: null,
+    };
+    List.update(data, {
+        where: { id: id }
+    })
+        .then(num => {
+            if (num == 1) {
+                res.send({
+                    message: "List was recovery successfully!",
+                    id: id
+                });
+            } else {
+                res.send({
+                    message: `Cannot recovery List with id=${id}. Maybe List was not found!`
+                });
+            }
+        })
+        .catch(err => {
+            res.status(500).send({
+                message: "Could not recovery List with id=" + id
             });
         });
 }

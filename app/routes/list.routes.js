@@ -9,13 +9,17 @@ module.exports = app => {
     // Retrieve all list
     router.get("/", list.get);
 
+    // Retrieve by id
     router.get("/:id", list.getById);
   
     // Update a list with id
     router.put("/:id", list.update);
   
-    // Delete a list with id
-    router.delete("/:id", list.delete);
+    // Go list to trash with id
+    router.delete("/:id", list.addToTrash);
+  
+    // Remove list with trash by id
+    router.post("/:id/recovery", list.removeToTrash);
   
     app.use('/api/list', router);
   };

@@ -23,7 +23,6 @@ exports.getById = (req, res) => {
   res.set('Access-Control-Allow-Origin', '*')
   const id = req.params.id;
   const condition = id ? {id : +id} : null ;
-  console.log(condition);
   listServices.getById(req, res, id);
 };
 
@@ -52,4 +51,29 @@ exports.delete = (req, res) => {
   }
   listServices.delete(req, res, id);
 };
+
+exports.addToTrash = (req, res) => {
+  res.set('Access-Control-Allow-Origin', '*')
+  const id = req.params.id;
+  if(!id) {
+    res.send({
+      message: "Not found id for delete "
+    });
+    return;
+  }
+  listServices.addToTrash(req, res, id);
+};
+
+exports.removeToTrash = (req, res) => {
+  res.set('Access-Control-Allow-Origin', '*')
+  const id = req.params.id;
+  if(!id) {
+    res.send({
+      message: "Not found id for delete "
+    });
+    return;
+  }
+  listServices.removeToTrash(req, res, id);
+};
+
 

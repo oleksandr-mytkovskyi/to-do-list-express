@@ -6,13 +6,21 @@ module.exports = (sequelize, Sequelize) => {
         primaryKey: true,
       },
       name: {
-        type: Sequelize.STRING
+        type: Sequelize.STRING(32)
       },
       status: {
         type: Sequelize.BOOLEAN,
         defaultValue: false
       },
-    });
+      isDeleted: {
+        type: Sequelize.BOOLEAN,
+        defaultValue: false
+      },
+      deleteData: {
+        type: Sequelize.STRING,
+        defaultValue: null
+      }
+    }); 
   
     return List;
   };
