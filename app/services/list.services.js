@@ -30,6 +30,9 @@ exports.get = (req, res, query) => {
     List.findAll({
         attributes: ['id', 'name', 'status', 'updatedAt', 'createdAt' ],
         where: {isDeleted: false},
+        order: [
+            ['id', 'ASC'],
+        ],
         limit: limit,
         offset: offset,
     })
