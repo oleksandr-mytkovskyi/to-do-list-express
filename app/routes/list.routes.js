@@ -16,7 +16,7 @@ module.exports = app => {
     router.put("/:id", list.update);
   
     // Go list to trash with id
-    router.delete("/:id", list.addToTrash);
+    router.delete("/:id", list.delete);
   
     // Remove list with trash by id
     router.post("/:id/recovery", list.removeToTrash);
