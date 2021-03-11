@@ -25,10 +25,13 @@ exports.add = (req, res) => {
         });
 }
 
-exports.get = (req, res) => {
+exports.get = (req, res, query) => {
+    const {limit, offset} = query;
     List.findAll({
         attributes: ['id', 'name', 'status', 'updatedAt', 'createdAt' ],
-        where: {isDeleted: false}
+        where: {isDeleted: false},
+        limit: limit,
+        offset: offset,
     })
     .then(data => {
       res.send(data);
