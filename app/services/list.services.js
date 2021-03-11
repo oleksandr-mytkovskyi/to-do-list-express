@@ -43,7 +43,7 @@ exports.get = async (req, res, query) => {
 exports.getById = async (req, res, id) => {
     try {
         const data = await List.findAll({
-            attributes: ['id2', 'name', 'status', 'updatedAt', 'createdAt'],
+            attributes: ['id', 'name', 'status', 'updatedAt', 'createdAt'],
             where: { id: id, isDeleted: false }
         });
         res.send(data[0]);
