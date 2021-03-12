@@ -5,12 +5,12 @@ const sequelize = new Sequelize(dbConfig.DB, dbConfig.USER, dbConfig.PASSWORD, {
   host: dbConfig.HOST,
   dialect: dbConfig.dialect,
   operatorsAliases: false,
-  // dialectOptions: {
-  //   ssl: {
-  //     require: true, // This will help you. But you will see nwe error
-  //     rejectUnauthorized: false // This line will fix new error
-  //   }
-  // },
+  dialectOptions: {
+    ssl: {
+      require: true, // This will help you. But you will see nwe error
+      rejectUnauthorized: false // This line will fix new error
+    }
+  },
 });
 
 // const sequelize = new Sequelize(ENV['DB'], ENV['USER'], ENV['PASSWORD'], {
