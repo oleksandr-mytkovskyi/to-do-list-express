@@ -69,7 +69,7 @@ exports.removeToTrash = (req, res) => {
   const id = req.params.id;
   if(!id) {
     res.send({
-      message: "Not found id for delete "
+      message: "Not found id for delete"
     });
     return;
   }
