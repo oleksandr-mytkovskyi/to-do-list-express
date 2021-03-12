@@ -29,7 +29,7 @@ exports.get = async (req, res, query) => {
             order: [
                 ['id', 'ASC'],
             ],
-            limit: limit,
+            limit: limit || 10,
             offset: offset,
         });
         res.send(data);
@@ -46,6 +46,9 @@ exports.getById = async (req, res, id) => {
             attributes: ['id', 'name', 'status', 'updatedAt', 'createdAt'],
             where: { id: id, isDeleted: false }
         });
+        if (!data[0]) {
+            throw new Error(`Not found list with ${id}`);
+        } 
         res.send(data[0]);
     } catch (e) {
         res.status(500).send({
@@ -76,26 +79,18 @@ exports.updata = async (req, res, id) => {
     }
 }
 
-
 exports.delete = async (req, res, id) => {
     try {
         const data = await List.destroy({
             where: { id: id }
         });
         if (data != 1) {
-            res.status(500).send({
-                message: `Cannot delete List with id=${id}. Maybe List was not found!`
-            });
-            return;
+            throw new Error(`Cannot delete List with id=${id}. Maybe List was not found!`);
         }
-        res.send({
-            message: "List was deleted successfully!",
-            id: id
-        });
+        // потрібно записувати десь в логи сервера цю операцію
+        console.log(`List with ${id} was deleted successfully!`);
     } catch (e) {
-        res.status(500).send({
-            message: e.message || "Could not delete List with id=" + id
-        });
+        console.log(e.message || `Could not delete List with id=${id}`);
     }
 }
 
@@ -105,6 +100,13 @@ exports.addToTrash = async (req, res, id) => {
         deleteData: new Date().toISOString(),
     };
     try {
+        const foundList = await List.findOne({
+            where: { id: id, isDeleted: true}
+        });
+        if(foundList) {
+            throw new Error(`Cannot delete List with id=${id} because he was deleted`);
+        }
+
         const data = await List.update(postData, {
             where: { id: id }
         });
@@ -120,6 +122,7 @@ exports.addToTrash = async (req, res, id) => {
         });
         let timerId = setTimeout(() => {
             this.delete(req, res, id);
+            timerDelete.delete(id);
         }, 60000);
         timerDelete.set(id, timerId);
     } catch (e) {
@@ -150,10 +153,6 @@ exports.removeToTrash = async (req, res, id) => {
             message: "List was recovery successfully!",
             id: id
         });
-        let timerId = setTimeout(() => {
-            this.delete(req, res, id);
-        }, 60000);
-        timerDelete.set(id, timerId);
     } catch (e) {
         res.status(500).send({
             message: e.message || "Could not recovery List with id=" + id
