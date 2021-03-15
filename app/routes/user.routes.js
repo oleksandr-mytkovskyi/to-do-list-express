@@ -1,6 +1,5 @@
 const user = require("../controllers/user.controller.js");
 const router = require("express").Router();
-const jwt = require('../modules/jwt');
 
 module.exports = app => {
 
@@ -15,18 +14,6 @@ module.exports = app => {
       
       console.log('logout');
     });
-    
-    // // Retrieve by id
-    // router.get("/:id", list.getById);
-  
-    // // Update a list with id
-    // router.put("/:id", list.update);
-  
-    // // Go list to trash with id
-    // router.delete("/:id", list.addToTrash);
-  
-    // // Remove list with trash by id
-    // router.post("/:id/recovery", list.removeToTrash);
-  
+
     app.use('/auth', router);
   };

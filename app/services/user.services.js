@@ -24,14 +24,14 @@ exports.reg = async (req, res) => {
                 email: email,
                 password: hash,
             };
-            const data = await User.create(field);
-            // треба перевірка на те, що в базу все ок записалось?
-            let token = await jwt.createToken(email, '1h');
+            await User.create(field);
+            let token = await jwt.createToken(email);
             res.send({
-                sucess: true,
-                token,
-              });  
+            sucess: true,
+            token,
+          });  
         });
+        
     } catch(e) {
         res.status(400).send({
             message: e.message || "invalid registration"
@@ -59,113 +59,21 @@ exports.login = async (req, res) => {
                 if(!result) {
                     throw new Error('Password incorect'); 
                 }
-                const token = await jwt.createToken(email, '1h');
+                const token = await jwt.createToken(email);
                 res.send({
-                sucess: true,
-                token,
-                });  
+                    sucess: true,
+                    token,
+                });   
             } catch(e) {
                 res.status(500).send({
                     message: e.message
                 });
             }
         });
+
     } catch(e) {
         res.status(500).send({
             message: e.message || 'invalid login'
         });
     }
 }
-
-
-// exports.add = async (req, res) => {
-//     // Create a List
-//     const list = {
-//         name: req.body.name,
-//         status: req.body.status,
-//         isDeleted: req.body.isDeleted,
-//         deteteData: req.body.deteteData,
-//     };
-//     try {
-//         const data = await List.create(list);
-//         res.send(data);
-//     } catch (e) {
-//         res.status(500).send({
-//             message: e.message || "Some error occurred while creating the List."
-//         });
-//     }
-// }
-
-// exports.get = async (req, res, query) => {
-//     try {
-//         const { limit, offset } = query;
-//         const data = await List.findAll({
-//             attributes: ['id', 'name', 'status', 'updatedAt', 'createdAt'],
-//             where: { isDeleted: false },
-//             order: [
-//                 ['id', 'ASC'],
-//             ],
-//             limit: limit || 10,
-//             offset: offset,
-//         });
-//         res.send(data);
-//     } catch (e) {
-//         res.status(500).send({
-//             message: e.message || "Some error occurred while retrieving Lists."
-//           });
-//     }
-// }
-
-// exports.getById = async (req, res, id) => {
-//     try {
-//         const data = await List.findAll({
-//             attributes: ['id', 'name', 'status', 'updatedAt', 'createdAt'],
-//             where: { id: id, isDeleted: false }
-//         });
-//         if (!data[0]) {
-//             throw new Error(`Not found list with ${id}`);
-//         } 
-//         res.send(data[0]);
-//     } catch (e) {
-//         res.status(500).send({
-//             message: e.message || "Some error occurred while retrieving Lists."
-//           });
-//     }
-// }
-
-// exports.updata = async (req, res, id) => {
-//     try {
-//         const data = await List.update(req.body, {
-//             where: { id: id }
-//         });
-//         if (data != 1) {
-//             res.status(500).send({
-//                 message: `Cannot update List with id=${id}. Maybe List was not found or req.body is empty!`
-//             });
-//             return;
-//         }
-//         res.send({
-//             message: "List was updated successfully.",
-//             id: id
-//         })
-//     } catch (e) {
-//         res.status(500).send({
-//             message: e.message || "Error updating List with id=" + id
-//         });
-//     }
-// }
-
-// exports.delete = async (req, res, id) => {
-//     try {
-//         const data = await List.destroy({
-//             where: { id: id }
-//         });
-//         if (data != 1) {
-//             throw new Error(`Cannot delete List with id=${id}. Maybe List was not found!`);
-//         }
-//         // потрібно записувати десь в логи сервера цю операцію
-//         console.log(`List with ${id} was deleted successfully!`);
-//     } catch (e) {
-//         console.log(e.message || `Could not delete List with id=${id}`);
-//     }
-// }

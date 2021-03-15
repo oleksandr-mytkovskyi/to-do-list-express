@@ -1,40 +1,32 @@
 const jwt = require('jsonwebtoken');
 const fs = require('fs');
-
-exports.getSslKey = () => {
-    const str = fs.readFileSync('C:/Users/user/Desktop/crud-backend-main/publickKey', 'utf8');
-    ssl = str.substring(str.lastIndexOf('"') + 1, str.lastIndexOf('=') + 1);
-    return ssl;  
+const publicUrl = 'C:/Users/user/Desktop/crud-backend-main/publickKey';
+const privatUrl = 'C:/Users/user/Desktop/crud-backend-main/privatKey.ppk';
+exports.getKey = (url) => {
+    return fs.readFileSync(url, 'utf8');   
 }
 
-const secret = this.getSslKey();
+const publickKey = this.getKey(publicUrl);
+const privatKey = this.getKey(privatUrl);
 
-exports.createToken = async (email, expiresIn) => {
+exports.createToken = async (email) => {
     return jwt.sign(
         { email },
-        secret,
-        { algorithm: 'HS256'},
-        { expiresIn }
+        publickKey,
+        {   
+            algorithm: 'HS256',
+            expiresIn: '1h'
+        },
       );
 }
 
-exports.checkToken = async (req, res, next) => {
-    try {
-        const token = req.headers.authorization.split(' ')[1];
-        if(!token) {
-            throw new Error('Does not token, you need authorization')
-        }
-        console.log(token);
-        jwt.verify(token, secret, function (err, decoded) {
-            if(err) {
-                throw new Error('Token doen not valid');
-            }
-            next();    
-        });
+exports.checkToken = (token) => {  
+    try{
+        const decoded = jwt.verify(token, publickKey);
+        console.log(decoded);
+        return true;
     } catch(e) {
-        res.status(401).send({
-            messege: e.messege || 'you need authorization'
-        })
+        return false;
     }
 }
 
