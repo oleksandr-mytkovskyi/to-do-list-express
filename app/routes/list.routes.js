@@ -1,5 +1,11 @@
 const list = require("../controllers/list.controller.js");
 const router = require("express").Router();
+const exjwt = require('express-jwt');
+
+const jwtMW = exjwt({
+  secret: 'my first jwt token',
+  algorithms: ['HS256']
+});
 
 module.exports = app => {
 
@@ -7,10 +13,10 @@ module.exports = app => {
     router.post("/", list.add);
   
     // Retrieve all list
-    router.get("/", list.get);
+    router.get("/", jwtMW, list.get);
 
     // Retrieve by id
-    router.get("/:id", list.getById);
+    router.get("/:id", jwtMW, list.getById);
   
     // Update a list with id
     router.put("/:id", list.update);
