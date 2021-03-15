@@ -1,17 +1,8 @@
 const db = require("../models");
-const jwt = require('jsonwebtoken');
+const jwt = require('../modules/jwt');
 const bcrypt = require('bcrypt');
 const saltRounds = 10;
 const User = db.user;
-
-async function createToken(email, expiresIn) {
-    return jwt.sign(
-        { email: email },
-        'my first jwt token',
-        { algorithm: 'HS256'},
-        { expiresIn: expiresIn }
-      );
-}
 
 exports.reg = async (req, res) => {
     try {
@@ -35,7 +26,7 @@ exports.reg = async (req, res) => {
             };
             const data = await User.create(field);
             // треба перевірка на те, що в базу все ок записалось?
-            let token = await createToken(email, '1h');
+            let token = await jwt.createToken(email, '1h');
             res.send({
                 sucess: true,
                 token,
@@ -68,7 +59,7 @@ exports.login = async (req, res) => {
                 if(!result) {
                     throw new Error('Password incorect'); 
                 }
-                const token = await createToken(email, '1h');
+                const token = await jwt.createToken(email, '1h');
                 res.send({
                 sucess: true,
                 token,

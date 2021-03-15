@@ -1,5 +1,6 @@
 const user = require("../controllers/user.controller.js");
 const router = require("express").Router();
+const jwt = require('../modules/jwt');
 
 module.exports = app => {
 
@@ -10,7 +11,10 @@ module.exports = app => {
     
     router.post("/reg", user.reg);
 
-    router.post("/logout", () => {console.log('logout')});
+    router.post("/logout", () => {
+      
+      console.log('logout');
+    });
     
     // // Retrieve by id
     // router.get("/:id", list.getById);

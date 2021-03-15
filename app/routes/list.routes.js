@@ -1,22 +1,18 @@
 const list = require("../controllers/list.controller.js");
 const router = require("express").Router();
-const exjwt = require('express-jwt');
-
-const jwtMW = exjwt({
-  secret: 'my first jwt token',
-  algorithms: ['HS256']
-});
+const jwt = require('../modules/jwt');
 
 module.exports = app => {
-
+    //auth middleware
+    // app.use(jwt.checkToken);
     // Create a new list
     router.post("/", list.add);
   
     // Retrieve all list
-    router.get("/", jwtMW, list.get);
+    router.get("/", list.get);
 
     // Retrieve by id
-    router.get("/:id", jwtMW, list.getById);
+    router.get("/:id", list.getById);
   
     // Update a list with id
     router.put("/:id", list.update);
@@ -27,5 +23,5 @@ module.exports = app => {
     // Remove list with trash by id
     router.post("/:id/recovery", list.removeToTrash);
   
-    app.use('/api/list', router);
+    app.use('/api/list', jwt.checkToken, router);
   };
