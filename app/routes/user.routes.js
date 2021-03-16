@@ -10,10 +10,7 @@ module.exports = app => {
     
     router.post("/reg", user.reg);
 
-    router.post("/logout", () => {
-      
-      console.log('logout');
-    });
+    router.post("/refresh", user.refresh);
 
     app.use('/auth', router);
   };

@@ -49,4 +49,17 @@ exports.login = (req, res) => {
   userServices.login(req, res);
 };
 
+exports.refresh = (req, res) => {
+  res.set('Access-Control-Allow-Origin', '*');
+  // Validate request
+  if (!req.body.refreshToken) {
+    res.status(400).send({
+      message: "refreshToken not found"
+    });
+    return;
+  }
+  userServices.refresh(req, res);
+};
+
+
 

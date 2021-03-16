@@ -3,6 +3,7 @@ const jwt = require('../modules/jwt');
 const bcrypt = require('bcrypt');
 const saltRounds = 10;
 const User = db.user;
+const RefreshToken = db.refreshToken;
 
 exports.reg = async (req, res) => {
     try {
@@ -15,21 +16,38 @@ exports.reg = async (req, res) => {
             throw new Error('email already in use, maybe you need login');
         }
         // bcrypt
-        bcrypt.hash(password, saltRounds, async function(err, hash) {
-            if(err) {
-                throw new Error('Error in hash callback');
+        bcrypt.hash(password, saltRounds, async function (err, hash) {
+            try {
+                if (err) {
+                    throw new Error('Error in hash callback');
+                }
+                const field = {
+                    userName: userName,
+                    email: email,
+                    password: hash,
+                };
+                const data = await User.create(field);
+                const id = data.dataValues.id;
+          
+                const accessToken = await jwt.createAccessToken(id, email, userName);
+                const refreshToken = await jwt.createRefreshToken(id, email, userName);
+
+                const fieldToken = {
+                    userId: id,
+                    refreshToken: refreshToken
+                }
+                RefreshToken.create(fieldToken);
+
+                res.send({
+                    sucess: true,
+                    accessToken,
+                    refreshToken,
+                });
+            } catch (e) {
+                res.status(400).send({
+                    message: e.message
+                })
             }
-            const field = {
-                userName: userName,
-                email: email,
-                password: hash,
-            };
-            await User.create(field);
-            let token = await jwt.createToken(email);
-            res.send({
-            sucess: true,
-            token,
-          });  
         });
         
     } catch(e) {
@@ -41,17 +59,17 @@ exports.reg = async (req, res) => {
 
 exports.login = async (req, res) => {
     try {
-        const {email, password} = req.body;
         const data = await User.findOne({
-            attributes: ['id', 'email', 'password'],
-            where: { email: email}
+            attributes: ['id', 'email', 'userName', 'password'],
+            where: { email: req.body.email}
         });
         if (!data) {
-            throw new Error(`email ${email} does not exist`)
+            throw new Error(`email ${req.body.email} does not exist`)
         }
         const hash = data.dataValues.password;
+        const {id, email, userName} = data.dataValues;
 
-        bcrypt.compare(password, hash, async function(err, result) {
+        bcrypt.compare(req.body.password, hash, async function(err, result) {
             try {
                 if(err) {
                     throw new Error('Error in hash callback on Login');
@@ -59,10 +77,20 @@ exports.login = async (req, res) => {
                 if(!result) {
                     throw new Error('Password incorect'); 
                 }
-                const token = await jwt.createToken(email);
+                const accessToken = await jwt.createAccessToken(id, email, userName);
+                const refreshToken = await jwt.createRefreshToken(id, email, userName);
+                
+                const fieldToken = {
+                    refreshToken: refreshToken
+                }
+                await RefreshToken.update(fieldToken, {
+                    where: { userId: id }
+                });
+
                 res.send({
                     sucess: true,
-                    token,
+                    accessToken,
+                    refreshToken
                 });   
             } catch(e) {
                 res.status(500).send({
@@ -76,4 +104,36 @@ exports.login = async (req, res) => {
             message: e.message || 'invalid login'
         });
     }
+}
+exports.refresh = async (req, res) => {
+    try {
+        const {refreshToken} = req.body;
+        const checkData = jwt.checkToken(refreshToken);
+        if(!checkData) {
+            throw new Error('Refresh token not valid');
+        }
+        const {id, email, userName} = checkData;
+        const newAccessToken = await jwt.createAccessToken(id, email, userName);
+        const newRefreshToken = await jwt.createRefreshToken(id, email, userName);
+        
+        const fieldToken = {
+            refreshToken: newRefreshToken
+        }
+        await RefreshToken.update(fieldToken, {
+            where: { userId: id }
+        });
+
+        res.send({
+            sucess: true,
+            accessToken: newAccessToken,
+            refreshToken: newRefreshToken
+        });   
+
+
+    } catch(e) {
+        res.status(400).send({
+            message: e.message
+        })
+    }
+
 }
