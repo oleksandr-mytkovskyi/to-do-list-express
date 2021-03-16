@@ -6,7 +6,7 @@ exports.jwtMiddleWare = async (req, res, next) => {
         if(!token) {
             throw new Error('Does not token, you need authorization')
         }
-        const checkToken =  jwt.checkToken(token);
+        const checkToken =  jwt.checkToken(token, {type: "access"});
         if(!checkToken) {
             throw new Error('Token not valid');
         }

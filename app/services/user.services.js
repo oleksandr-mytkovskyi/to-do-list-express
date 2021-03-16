@@ -5,6 +5,24 @@ const saltRounds = 10;
 const User = db.user;
 const RefreshToken = db.refreshToken;
 
+const refreshTokens = async (id, email, userName) => {
+    const newAccessToken = await jwt.createAccessToken(id, email, userName);
+    const newRefreshToken = await jwt.createRefreshToken(id, email, userName);
+    
+    const fieldToken = {
+        refreshToken: newRefreshToken
+    }
+    await RefreshToken.update(fieldToken, {
+        where: { userId: id }
+    });
+    return {
+        sucess: true,
+        accessToken: newAccessToken,
+        refreshToken: newRefreshToken
+    };   
+
+}
+
 exports.reg = async (req, res) => {
     try {
         const {email, password, userName} = req.body;
@@ -77,21 +95,8 @@ exports.login = async (req, res) => {
                 if(!result) {
                     throw new Error('Password incorect'); 
                 }
-                const accessToken = await jwt.createAccessToken(id, email, userName);
-                const refreshToken = await jwt.createRefreshToken(id, email, userName);
-                
-                const fieldToken = {
-                    refreshToken: refreshToken
-                }
-                await RefreshToken.update(fieldToken, {
-                    where: { userId: id }
-                });
-
-                res.send({
-                    sucess: true,
-                    accessToken,
-                    refreshToken
-                });   
+                const obj = await refreshTokens(id, email, userName);
+                res.send(obj);   
             } catch(e) {
                 res.status(500).send({
                     message: e.message
@@ -108,26 +113,13 @@ exports.login = async (req, res) => {
 exports.refresh = async (req, res) => {
     try {
         const {refreshToken} = req.body;
-        const checkData = jwt.checkToken(refreshToken);
-        if(!checkData) {
+        const parseToken = jwt.checkToken(refreshToken,  {type: "refresh"});
+        if(!parseToken) {
             throw new Error('Refresh token not valid');
         }
-        const {id, email, userName} = checkData;
-        const newAccessToken = await jwt.createAccessToken(id, email, userName);
-        const newRefreshToken = await jwt.createRefreshToken(id, email, userName);
-        
-        const fieldToken = {
-            refreshToken: newRefreshToken
-        }
-        await RefreshToken.update(fieldToken, {
-            where: { userId: id }
-        });
-
-        res.send({
-            sucess: true,
-            accessToken: newAccessToken,
-            refreshToken: newRefreshToken
-        });   
+        const {id, email, userName} = parseToken;
+        const obj = await refreshTokens(id, email, userName);
+        res.send(obj);   
 
 
     } catch(e) {

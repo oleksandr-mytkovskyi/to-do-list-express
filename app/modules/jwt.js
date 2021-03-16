@@ -1,13 +1,18 @@
 const jwt = require('jsonwebtoken');
 const fs = require('fs');
-const publicUrl = 'C:/Users/user/Desktop/crud-backend-main/publicKey';
-const privatUrl = 'C:/Users/user/Desktop/crud-backend-main/privatKey';
+const publicUrlA = 'C:/Users/user/Desktop/crud-backend-main/publicKeyA';
+const privatUrlA = 'C:/Users/user/Desktop/crud-backend-main/privatKeyA';
+const publicUrlR = 'C:/Users/user/Desktop/crud-backend-main/publicKeyR';
+const privatUrlR = 'C:/Users/user/Desktop/crud-backend-main/privatKeyR';
 exports.getKey = (url) => {
     return fs.readFileSync(url, 'utf8');   
 }
 
-const publickKey = this.getKey(publicUrl);
-const privatKey = this.getKey(privatUrl);
+const publickKeyAccess = this.getKey(publicUrlA);
+const privatKeyAccess = this.getKey(privatUrlA);
+
+const publickKeyRefresh = this.getKey(publicUrlR);
+const privatKeyRefresh = this.getKey(privatUrlR);
 
 exports.createAccessToken = async (id, email, userName) => {
     return jwt.sign(
@@ -16,7 +21,7 @@ exports.createAccessToken = async (id, email, userName) => {
             email,
             userName,
         },
-        privatKey,
+        privatKeyAccess,
         {   
             algorithm: 'RS256',
             expiresIn: '1h' ,
@@ -32,7 +37,7 @@ exports.createRefreshToken = async (id, email, userName) => {
             email,
             userName,
         },
-        privatKey,
+        privatKeyRefresh,
         {   
             algorithm: 'RS256',
             expiresIn: '30d' ,
@@ -41,12 +46,23 @@ exports.createRefreshToken = async (id, email, userName) => {
       );
 }
 
-exports.checkToken = (token) => {  
-    try{
-        const decoded = jwt.verify(token, publickKey);
-        console.log(decoded);
+exports.checkToken = (token, options) => {
+    try {
+        let signature = null;
+        switch (options.type) {
+            case 'access':
+                signature = publickKeyAccess;
+                break;
+            case 'refresh':
+                signature = publickKeyRefresh;
+                break;
+            default:
+                break;
+        }
+        const decoded = jwt.verify(token, signature);
+        // console.log(decoded);
         return decoded;
-    } catch(e) {
+    } catch (e) {
         return false;
     }
 }
