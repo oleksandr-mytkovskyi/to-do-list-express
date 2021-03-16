@@ -14,12 +14,13 @@ const privatKeyAccess = this.getKey(privatUrlA);
 const publickKeyRefresh = this.getKey(publicUrlR);
 const privatKeyRefresh = this.getKey(privatUrlR);
 
-exports.createAccessToken = async (id, email, userName) => {
+exports.createAccessToken = async (id, email, userName, roleId) => {
     return jwt.sign(
         { 
             id,
             email,
             userName,
+            roleId
         },
         privatKeyAccess,
         {   
@@ -30,12 +31,13 @@ exports.createAccessToken = async (id, email, userName) => {
       );
 }
 
-exports.createRefreshToken = async (id, email, userName) => {
+exports.createRefreshToken = async (id, email, userName, roleId) => {
     return jwt.sign(
         { 
             id,
             email,
             userName,
+            roleId
         },
         privatKeyRefresh,
         {   
@@ -60,7 +62,7 @@ exports.checkToken = (token, options) => {
                 break;
         }
         const decoded = jwt.verify(token, signature);
-        // console.log(decoded);
+        console.log(decoded);
         return decoded;
     } catch (e) {
         return false;

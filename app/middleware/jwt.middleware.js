@@ -6,14 +6,15 @@ exports.jwtMiddleWare = async (req, res, next) => {
         if(!token) {
             throw new Error('Does not token, you need authorization')
         }
-        const checkToken =  jwt.checkToken(token, {type: "access"});
-        if(!checkToken) {
+        const parseToken =  jwt.checkToken(token, {type: "access"});
+        if(!parseToken) {
             throw new Error('Token not valid');
         }
+        req.roleId = parseToken.roleId;
         next();
     } catch(e) {
         res.status(401).send({
-            messege: e.messege || 'you need authorization'
+            message: e.message || 'you need authorization'
         })
     }
 }

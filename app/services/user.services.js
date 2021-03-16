@@ -5,9 +5,9 @@ const saltRounds = 10;
 const User = db.user;
 const RefreshToken = db.refreshToken;
 
-const refreshTokens = async (id, email, userName) => {
-    const newAccessToken = await jwt.createAccessToken(id, email, userName);
-    const newRefreshToken = await jwt.createRefreshToken(id, email, userName);
+const refreshTokens = async (id, email, userName, roleId) => {
+    const newAccessToken = await jwt.createAccessToken(id, email, userName, roleId);
+    const newRefreshToken = await jwt.createRefreshToken(id, email, userName, roleId);
     
     const fieldToken = {
         refreshToken: newRefreshToken
@@ -47,8 +47,8 @@ exports.reg = async (req, res) => {
                 const data = await User.create(field);
                 const id = data.dataValues.id;
           
-                const accessToken = await jwt.createAccessToken(id, email, userName);
-                const refreshToken = await jwt.createRefreshToken(id, email, userName);
+                const accessToken = await jwt.createAccessToken(id, email, userName, 3);
+                const refreshToken = await jwt.createRefreshToken(id, email, userName, 3);
 
                 const fieldToken = {
                     userId: id,
@@ -78,14 +78,14 @@ exports.reg = async (req, res) => {
 exports.login = async (req, res) => {
     try {
         const data = await User.findOne({
-            attributes: ['id', 'email', 'userName', 'password'],
+            attributes: ['id', 'email', 'userName', 'password', 'roleId'],
             where: { email: req.body.email}
         });
         if (!data) {
             throw new Error(`email ${req.body.email} does not exist`)
         }
         const hash = data.dataValues.password;
-        const {id, email, userName} = data.dataValues;
+        const {id, email, userName, roleId} = data.dataValues;
 
         bcrypt.compare(req.body.password, hash, async function(err, result) {
             try {
@@ -95,7 +95,7 @@ exports.login = async (req, res) => {
                 if(!result) {
                     throw new Error('Password incorect'); 
                 }
-                const obj = await refreshTokens(id, email, userName);
+                const obj = await refreshTokens(id, email, userName, roleId);
                 res.send(obj);   
             } catch(e) {
                 res.status(500).send({
@@ -117,8 +117,8 @@ exports.refresh = async (req, res) => {
         if(!parseToken) {
             throw new Error('Refresh token not valid');
         }
-        const {id, email, userName} = parseToken;
-        const obj = await refreshTokens(id, email, userName);
+        const {id, email, userName, roleId} = parseToken;
+        const obj = await refreshTokens(id, email, userName, roleId);
         res.send(obj);   
 
 
