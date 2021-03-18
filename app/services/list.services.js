@@ -2,7 +2,7 @@ const db = require("../models");
 const List = db.list;
 let timerDelete = new Map();
 
-exports.add = async (req, res) => {
+exports.add = async (req, res, next) => {
     // Create a List
     const list = {
         name: req.body.name,
@@ -14,13 +14,11 @@ exports.add = async (req, res) => {
         const data = await List.create(list);
         res.send(data);
     } catch (e) {
-        res.status(500).send({
-            message: e.message || "Some error occurred while creating the List."
-        });
+       next(e);
     }
 }
 
-exports.get = async (req, res, query) => {
+exports.get = async (req, res, next, query) => {
     try {
         const { limit, offset } = query;
         const data = await List.findAll({
@@ -34,13 +32,11 @@ exports.get = async (req, res, query) => {
         });
         res.send(data);
     } catch (e) {
-        res.status(500).send({
-            message: e.message || "Some error occurred while retrieving Lists."
-          });
+        next(e);
     }
 }
 
-exports.getById = async (req, res, id) => {
+exports.getById = async (req, res, next, id) => {
     try {
         const data = await List.findAll({
             attributes: ['id', 'name', 'status', 'updatedAt', 'createdAt'],
@@ -51,13 +47,11 @@ exports.getById = async (req, res, id) => {
         } 
         res.send(data[0]);
     } catch (e) {
-        res.status(500).send({
-            message: e.message || "Some error occurred while retrieving Lists."
-          });
+        next(e);
     }
 }
 
-exports.updata = async (req, res, id) => {
+exports.updata = async (req, res, next, id) => {
     try {
         const data = await List.update(req.body, {
             where: { id: id }
@@ -73,13 +67,11 @@ exports.updata = async (req, res, id) => {
             id: id
         })
     } catch (e) {
-        res.status(500).send({
-            message: e.message || "Error updating List with id=" + id
-        });
+        next(e);
     }
 }
 
-exports.delete = async (req, res, id) => {
+exports.delete = async (req, res, next, id) => {
     try {
         const data = await List.destroy({
             where: { id: id }
@@ -90,11 +82,11 @@ exports.delete = async (req, res, id) => {
         // потрібно записувати десь в логи сервера цю операцію
         console.log(`List with ${id} was deleted successfully!`);
     } catch (e) {
-        console.log(e.message || `Could not delete List with id=${id}`);
+        next(e);
     }
 }
 
-exports.addToTrash = async (req, res, id) => {
+exports.addToTrash = async (req, res, next, id) => {
     const postData = {
         isDeleted: true,
         deleteData: new Date().toISOString(),
@@ -126,13 +118,11 @@ exports.addToTrash = async (req, res, id) => {
         }, 60000);
         timerDelete.set(id, timerId);
     } catch (e) {
-        res.status(500).send({
-            message: e.message || "Could not delete List with id=" + id
-        });
+        next(e);
     }
 }
 
-exports.removeToTrash = async (req, res, id) => {
+exports.removeToTrash = async (req, res, next, id) => {
     clearTimeout(timerDelete.get(id));
     timerDelete.delete(id);
     const postData = {
@@ -154,9 +144,7 @@ exports.removeToTrash = async (req, res, id) => {
             id: id
         });
     } catch (e) {
-        res.status(500).send({
-            message: e.message || "Could not recovery List with id=" + id
-        });
+        next(e);
     }
 }
 

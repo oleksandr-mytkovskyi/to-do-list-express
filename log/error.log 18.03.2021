@@ -1,0 +1,15 @@
+3/18/2021, 5:22:56 PM error: 400 Error: email admin@t2est.com does not exist
+    at Object.exports.login (C:\Users\user\Desktop\crud-backend-main\app\services\user.services.js:80:23)
+    at processTicksAndRejections (internal/process/task_queues.js:93:5)
+3/18/2021, 5:23:21 PM error: 500 Error: email already in use, maybe you need login
+    at Object.exports.reg (C:\Users\user\Desktop\crud-backend-main\app\services\user.services.js:34:19)
+    at processTicksAndRejections (internal/process/task_queues.js:93:5)
+3/18/2021, 5:24:25 PM error: 400 Error: email already in use, maybe you need login
+    at Object.exports.reg (C:\Users\user\Desktop\crud-backend-main\app\services\user.services.js:34:23)
+    at processTicksAndRejections (internal/process/task_queues.js:93:5)
+3/18/2021, 5:53:03 PM error: 400 Error: email already in use, maybe you need login
+    at Object.exports.reg (C:\Users\user\Desktop\crud-backend-main\app\services\user.services.js:34:23)
+    at processTicksAndRejections (internal/process/task_queues.js:93:5)
+3/18/2021, 6:22:03 PM error: 400 Error: email admin@t2est.com does not exist
+    at Object.exports.login (C:\Users\user\Desktop\crud-backend-main\app\services\user.services.js:82:23)
+    at processTicksAndRejections (internal/process/task_queues.js:93:5)

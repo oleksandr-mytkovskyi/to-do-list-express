@@ -1,7 +1,8 @@
 const express = require("express");
 const bodyParser = require("body-parser");
 const cors = require("cors");
-
+const winston = require("./app/utils/logger");
+const errorMiddleware = require('./app/middleware/error.middleware');
 const app = express();
 
 app.use(cors());
@@ -15,21 +16,26 @@ app.use(bodyParser.urlencoded({ extended: true }));
 const db = require("./app/models");
 db.sequelize.sync();
 
-// drop and re-sync db
-// db.sequelize.sync({ force: true }).then(() => {
-//     console.log("Drop and re-sync db.");
-//   });
-
-
-// simple route
 app.get("/", (req, res) => {
   res.json({ message: "Welcome to crud application" });
 });
 
 require("./app/routes/list.routes")(app);
+require("./app/routes/user.routes")(app);
 
-// set port, listen for requests
+app.use(errorMiddleware);
+
+
+// помилки в промісах
+process.on('unhandledRejection', (reason, promise) => {
+  winston.logger.log('error', reason);
+});
+process.on('rejectionHandled', (promise) => {
+  winston.logger.log('error', promise);
+});
+
 const PORT = process.env.PORT || 8080;
+
 app.listen(PORT, () => {
-  console.log(`Server is running on port ${PORT}.`);
+  winston.logger.info(`Server is running on port ${PORT}.`);
 });
