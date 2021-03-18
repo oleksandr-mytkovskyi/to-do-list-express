@@ -25,6 +25,7 @@ require("./app/routes/user.routes")(app);
 
 app.use(errorMiddleware);
 
+
 // помилки в промісах
 process.on('unhandledRejection', (reason, promise) => {
   winston.logger.log('error', reason);
