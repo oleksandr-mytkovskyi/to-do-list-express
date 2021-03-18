@@ -6,6 +6,11 @@
 .pnp.js
 /.log
 
+/publicKeyA
+/privatKeyA
+/publicKeyR
+/privatKeyR
+
 # testing
 /coverage
 
@@ -24,7 +29,4 @@ npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
 
-publicKeyA
-privatKeyA
-publicKeyR
-privatKeyR
+
