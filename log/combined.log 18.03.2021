@@ -1,0 +1,243 @@
+3/18/2021, 4:14:17 PM info: Server is running on port 8080.
+3/18/2021, 4:15:45 PM error: 500 Error: Not found list with 2
+    at Object.exports.getById (C:\Users\user\Desktop\crud-backend-main\app\services\list.services.js:50:19)
+    at processTicksAndRejections (internal/process/task_queues.js:93:5)
+3/18/2021, 4:16:15 PM info: Server is running on port 8080.
+3/18/2021, 4:17:50 PM info: Server is running on port 8080.
+3/18/2021, 4:17:53 PM info: Server is running on port 8080.
+3/18/2021, 4:17:57 PM info: Server is running on port 8080.
+3/18/2021, 4:18:10 PM info: Server is running on port 8080.
+3/18/2021, 4:19:12 PM info: Server is running on port 8080.
+3/18/2021, 4:19:43 PM info: Server is running on port 8080.
+3/18/2021, 4:24:09 PM info: Server is running on port 8080.
+3/18/2021, 4:24:25 PM info: Server is running on port 8080.
+3/18/2021, 4:24:42 PM info: Server is running on port 8080.
+3/18/2021, 4:25:00 PM info: Server is running on port 8080.
+3/18/2021, 4:25:06 PM info: Server is running on port 8080.
+3/18/2021, 4:25:21 PM info: Server is running on port 8080.
+3/18/2021, 4:25:50 PM info: Server is running on port 8080.
+3/18/2021, 4:25:59 PM info: Server is running on port 8080.
+3/18/2021, 4:26:04 PM info: Server is running on port 8080.
+3/18/2021, 4:26:57 PM error: 500 Error: Not found list with 2
+    at Object.exports.getById (C:\Users\user\Desktop\crud-backend-main\app\services\list.services.js:46:19)
+    at processTicksAndRejections (internal/process/task_queues.js:93:5)
+3/18/2021, 4:30:35 PM error: 500 Error: Cannot delete List with id=28 because he was deleted
+    at Object.exports.addToTrash (C:\Users\user\Desktop\crud-backend-main\app\services\list.services.js:99:19)
+    at processTicksAndRejections (internal/process/task_queues.js:93:5)
+3/18/2021, 4:31:34 PM error: next is not a function
+3/18/2021, 4:31:37 PM info: Server is running on port 8080.
+3/18/2021, 4:31:40 PM info: Server is running on port 8080.
+3/18/2021, 4:31:45 PM info: Server is running on port 8080.
+3/18/2021, 4:32:01 PM info: Server is running on port 8080.
+3/18/2021, 4:32:54 PM info: Server is running on port 8080.
+3/18/2021, 4:33:05 PM info: Server is running on port 8080.
+3/18/2021, 4:33:28 PM error: 500 Error: email is empty
+    at exports.reg (C:\Users\user\Desktop\crud-backend-main\app\controllers\user.controller.js:11:13)
+    at Layer.handle [as handle_request] (C:\Users\user\Desktop\crud-backend-main\node_modules\express\lib\router\layer.js:95:5)
+    at next (C:\Users\user\Desktop\crud-backend-main\node_modules\express\lib\router\route.js:137:13)
+    at Route.dispatch (C:\Users\user\Desktop\crud-backend-main\node_modules\express\lib\router\route.js:112:3)
+    at Layer.handle [as handle_request] (C:\Users\user\Desktop\crud-backend-main\node_modules\express\lib\router\layer.js:95:5)
+    at C:\Users\user\Desktop\crud-backend-main\node_modules\express\lib\router\index.js:281:22
+    at Function.process_params (C:\Users\user\Desktop\crud-backend-main\node_modules\express\lib\router\index.js:335:12)
+    at next (C:\Users\user\Desktop\crud-backend-main\node_modules\express\lib\router\index.js:275:10)
+    at Function.handle (C:\Users\user\Desktop\crud-backend-main\node_modules\express\lib\router\index.js:174:3)
+    at router (C:\Users\user\Desktop\crud-backend-main\node_modules\express\lib\router\index.js:47:12)
+3/18/2021, 4:34:22 PM info: Server is running on port 8080.
+3/18/2021, 4:34:24 PM error: 400 Error: email is empty
+    at exports.reg (C:\Users\user\Desktop\crud-backend-main\app\controllers\user.controller.js:11:17)
+    at Layer.handle [as handle_request] (C:\Users\user\Desktop\crud-backend-main\node_modules\express\lib\router\layer.js:95:5)
+    at next (C:\Users\user\Desktop\crud-backend-main\node_modules\express\lib\router\route.js:137:13)
+    at Route.dispatch (C:\Users\user\Desktop\crud-backend-main\node_modules\express\lib\router\route.js:112:3)
+    at Layer.handle [as handle_request] (C:\Users\user\Desktop\crud-backend-main\node_modules\express\lib\router\layer.js:95:5)
+    at C:\Users\user\Desktop\crud-backend-main\node_modules\express\lib\router\index.js:281:22
+    at Function.process_params (C:\Users\user\Desktop\crud-backend-main\node_modules\express\lib\router\index.js:335:12)
+    at next (C:\Users\user\Desktop\crud-backend-main\node_modules\express\lib\router\index.js:275:10)
+    at Function.handle (C:\Users\user\Desktop\crud-backend-main\node_modules\express\lib\router\index.js:174:3)
+    at router (C:\Users\user\Desktop\crud-backend-main\node_modules\express\lib\router\index.js:47:12)
+3/18/2021, 4:34:42 PM info: Server is running on port 8080.
+3/18/2021, 4:34:55 PM error: 400 Error: email is empty
+    at exports.reg (C:\Users\user\Desktop\crud-backend-main\app\controllers\user.controller.js:11:17)
+    at Layer.handle [as handle_request] (C:\Users\user\Desktop\crud-backend-main\node_modules\express\lib\router\layer.js:95:5)
+    at next (C:\Users\user\Desktop\crud-backend-main\node_modules\express\lib\router\route.js:137:13)
+    at Route.dispatch (C:\Users\user\Desktop\crud-backend-main\node_modules\express\lib\router\route.js:112:3)
+    at Layer.handle [as handle_request] (C:\Users\user\Desktop\crud-backend-main\node_modules\express\lib\router\layer.js:95:5)
+    at C:\Users\user\Desktop\crud-backend-main\node_modules\express\lib\router\index.js:281:22
+    at Function.process_params (C:\Users\user\Desktop\crud-backend-main\node_modules\express\lib\router\index.js:335:12)
+    at next (C:\Users\user\Desktop\crud-backend-main\node_modules\express\lib\router\index.js:275:10)
+    at Function.handle (C:\Users\user\Desktop\crud-backend-main\node_modules\express\lib\router\index.js:174:3)
+    at router (C:\Users\user\Desktop\crud-backend-main\node_modules\express\lib\router\index.js:47:12)
+3/18/2021, 4:35:00 PM error: 400 Error: userName is empty
+    at exports.reg (C:\Users\user\Desktop\crud-backend-main\app\controllers\user.controller.js:16:17)
+    at Layer.handle [as handle_request] (C:\Users\user\Desktop\crud-backend-main\node_modules\express\lib\router\layer.js:95:5)
+    at next (C:\Users\user\Desktop\crud-backend-main\node_modules\express\lib\router\route.js:137:13)
+    at Route.dispatch (C:\Users\user\Desktop\crud-backend-main\node_modules\express\lib\router\route.js:112:3)
+    at Layer.handle [as handle_request] (C:\Users\user\Desktop\crud-backend-main\node_modules\express\lib\router\layer.js:95:5)
+    at C:\Users\user\Desktop\crud-backend-main\node_modules\express\lib\router\index.js:281:22
+    at Function.process_params (C:\Users\user\Desktop\crud-backend-main\node_modules\express\lib\router\index.js:335:12)
+    at next (C:\Users\user\Desktop\crud-backend-main\node_modules\express\lib\router\index.js:275:10)
+    at Function.handle (C:\Users\user\Desktop\crud-backend-main\node_modules\express\lib\router\index.js:174:3)
+    at router (C:\Users\user\Desktop\crud-backend-main\node_modules\express\lib\router\index.js:47:12)
+3/18/2021, 4:38:59 PM info: Server is running on port 8080.
+3/18/2021, 4:39:32 PM info: Server is running on port 8080.
+3/18/2021, 4:39:56 PM info: Server is running on port 8080.
+3/18/2021, 4:40:09 PM info: Server is running on port 8080.
+3/18/2021, 4:40:21 PM info: Server is running on port 8080.
+3/18/2021, 4:40:27 PM info: Server is running on port 8080.
+3/18/2021, 4:40:40 PM info: Server is running on port 8080.
+3/18/2021, 4:41:44 PM error: 500 Error: email adminxxx@test.com does not exist
+    at Object.exports.login (C:\Users\user\Desktop\crud-backend-main\app\services\user.services.js:87:19)
+    at processTicksAndRejections (internal/process/task_queues.js:93:5)
+3/18/2021, 4:42:11 PM error: 500 Error: Password incorect
+    at C:\Users\user\Desktop\crud-backend-main\app\services\user.services.js:98:27
+3/18/2021, 4:43:19 PM info: Server is running on port 8080.
+3/18/2021, 4:43:22 PM error: 400 Error: Password incorect
+    at C:\Users\user\Desktop\crud-backend-main\app\services\user.services.js:98:31
+3/18/2021, 4:43:46 PM info: Server is running on port 8080.
+3/18/2021, 4:43:55 PM error: 400 Error: email admin@t2est.com does not exist
+    at Object.exports.login (C:\Users\user\Desktop\crud-backend-main\app\services\user.services.js:87:23)
+    at processTicksAndRejections (internal/process/task_queues.js:93:5)
+3/18/2021, 4:44:14 PM info: Server is running on port 8080.
+3/18/2021, 4:44:52 PM error: 500 Error: email already in use, maybe you need login
+    at Object.exports.reg (C:\Users\user\Desktop\crud-backend-main\app\services\user.services.js:34:19)
+    at processTicksAndRejections (internal/process/task_queues.js:93:5)
+3/18/2021, 4:45:05 PM info: Server is running on port 8080.
+3/18/2021, 4:45:17 PM info: Server is running on port 8080.
+3/18/2021, 4:45:37 PM error: 500 Error: Refresh token not valid
+    at Object.exports.refresh (C:\Users\user\Desktop\crud-backend-main\app\services\user.services.js:117:19)
+    at exports.refresh (C:\Users\user\Desktop\crud-backend-main\app\controllers\user.controller.js:60:16)
+    at Layer.handle [as handle_request] (C:\Users\user\Desktop\crud-backend-main\node_modules\express\lib\router\layer.js:95:5)
+    at next (C:\Users\user\Desktop\crud-backend-main\node_modules\express\lib\router\route.js:137:13)
+    at Route.dispatch (C:\Users\user\Desktop\crud-backend-main\node_modules\express\lib\router\route.js:112:3)
+    at Layer.handle [as handle_request] (C:\Users\user\Desktop\crud-backend-main\node_modules\express\lib\router\layer.js:95:5)
+    at C:\Users\user\Desktop\crud-backend-main\node_modules\express\lib\router\index.js:281:22
+    at Function.process_params (C:\Users\user\Desktop\crud-backend-main\node_modules\express\lib\router\index.js:335:12)
+    at next (C:\Users\user\Desktop\crud-backend-main\node_modules\express\lib\router\index.js:275:10)
+    at Function.handle (C:\Users\user\Desktop\crud-backend-main\node_modules\express\lib\router\index.js:174:3)
+3/18/2021, 4:46:01 PM error: 500 Error: Refresh token not valid
+    at Object.exports.refresh (C:\Users\user\Desktop\crud-backend-main\app\services\user.services.js:117:19)
+    at exports.refresh (C:\Users\user\Desktop\crud-backend-main\app\controllers\user.controller.js:60:16)
+    at Layer.handle [as handle_request] (C:\Users\user\Desktop\crud-backend-main\node_modules\express\lib\router\layer.js:95:5)
+    at next (C:\Users\user\Desktop\crud-backend-main\node_modules\express\lib\router\route.js:137:13)
+    at Route.dispatch (C:\Users\user\Desktop\crud-backend-main\node_modules\express\lib\router\route.js:112:3)
+    at Layer.handle [as handle_request] (C:\Users\user\Desktop\crud-backend-main\node_modules\express\lib\router\layer.js:95:5)
+    at C:\Users\user\Desktop\crud-backend-main\node_modules\express\lib\router\index.js:281:22
+    at Function.process_params (C:\Users\user\Desktop\crud-backend-main\node_modules\express\lib\router\index.js:335:12)
+    at next (C:\Users\user\Desktop\crud-backend-main\node_modules\express\lib\router\index.js:275:10)
+    at Function.handle (C:\Users\user\Desktop\crud-backend-main\node_modules\express\lib\router\index.js:174:3)
+3/18/2021, 4:46:29 PM info: Server is running on port 8080.
+3/18/2021, 4:46:30 PM error: 400 Error: Refresh token not valid
+    at Object.exports.refresh (C:\Users\user\Desktop\crud-backend-main\app\services\user.services.js:117:23)
+    at exports.refresh (C:\Users\user\Desktop\crud-backend-main\app\controllers\user.controller.js:60:16)
+    at Layer.handle [as handle_request] (C:\Users\user\Desktop\crud-backend-main\node_modules\express\lib\router\layer.js:95:5)
+    at next (C:\Users\user\Desktop\crud-backend-main\node_modules\express\lib\router\route.js:137:13)
+    at Route.dispatch (C:\Users\user\Desktop\crud-backend-main\node_modules\express\lib\router\route.js:112:3)
+    at Layer.handle [as handle_request] (C:\Users\user\Desktop\crud-backend-main\node_modules\express\lib\router\layer.js:95:5)
+    at C:\Users\user\Desktop\crud-backend-main\node_modules\express\lib\router\index.js:281:22
+    at Function.process_params (C:\Users\user\Desktop\crud-backend-main\node_modules\express\lib\router\index.js:335:12)
+    at next (C:\Users\user\Desktop\crud-backend-main\node_modules\express\lib\router\index.js:275:10)
+    at Function.handle (C:\Users\user\Desktop\crud-backend-main\node_modules\express\lib\router\index.js:174:3)
+3/18/2021, 4:46:56 PM info: Server is running on port 8080.
+3/18/2021, 4:47:06 PM info: Server is running on port 8080.
+3/18/2021, 4:48:58 PM info: Server is running on port 8080.
+3/18/2021, 4:49:31 PM info: Server is running on port 8080.
+3/18/2021, 4:51:17 PM info: Server is running on port 8080.
+3/18/2021, 4:52:20 PM info: Server is running on port 8080.
+3/18/2021, 4:52:52 PM info: Server is running on port 8080.
+3/18/2021, 4:53:02 PM info: Server is running on port 8080.
+3/18/2021, 4:53:58 PM info: Server is running on port 8080.
+3/18/2021, 4:54:00 PM error: 400 Error: email admisn@test.com does not exist
+    at Object.exports.login (C:\Users\user\Desktop\crud-backend-main\app\services\user.services.js:80:23)
+    at processTicksAndRejections (internal/process/task_queues.js:93:5)
+3/18/2021, 4:54:23 PM info: Server is running on port 8080.
+3/18/2021, 4:59:32 PM info: Server is running on port 8080.
+3/18/2021, 4:59:51 PM info: Server is running on port 8080.
+3/18/2021, 4:59:55 PM error: 500 SequelizeDatabaseError: столбец "id2" не существует
+    at Query.formatError (C:\Users\user\Desktop\crud-backend-main\node_modules\sequelize\lib\dialects\postgres\query.js:386:16)
+    at Query.run (C:\Users\user\Desktop\crud-backend-main\node_modules\sequelize\lib\dialects\postgres\query.js:87:18)
+    at processTicksAndRejections (internal/process/task_queues.js:93:5)
+    at async C:\Users\user\Desktop\crud-backend-main\node_modules\sequelize\lib\sequelize.js:619:16
+    at async PostgresQueryInterface.select (C:\Users\user\Desktop\crud-backend-main\node_modules\sequelize\lib\dialects\abstract\query-interface.js:938:12)
+    at async Function.findAll (C:\Users\user\Desktop\crud-backend-main\node_modules\sequelize\lib\model.js:1753:21)
+    at async Function.findOne (C:\Users\user\Desktop\crud-backend-main\node_modules\sequelize\lib\model.js:1917:12)
+    at async Object.exports.login (C:\Users\user\Desktop\crud-backend-main\app\services\user.services.js:75:22)
+3/18/2021, 5:00:26 PM info: Server is running on port 8080.
+3/18/2021, 5:03:18 PM info: Server is running on port 8080.
+3/18/2021, 5:03:22 PM info: Server is running on port 8080.
+3/18/2021, 5:03:24 PM error: 400 Error: email admisn@test.com does not exist
+    at Object.exports.login (C:\Users\user\Desktop\crud-backend-main\app\services\user.services.js:81:23)
+    at exports.login (C:\Users\user\Desktop\crud-backend-main\app\controllers\user.controller.js:48:16)
+    at Layer.handle [as handle_request] (C:\Users\user\Desktop\crud-backend-main\node_modules\express\lib\router\layer.js:95:5)
+    at next (C:\Users\user\Desktop\crud-backend-main\node_modules\express\lib\router\route.js:137:13)
+    at Route.dispatch (C:\Users\user\Desktop\crud-backend-main\node_modules\express\lib\router\route.js:112:3)
+    at Layer.handle [as handle_request] (C:\Users\user\Desktop\crud-backend-main\node_modules\express\lib\router\layer.js:95:5)
+    at C:\Users\user\Desktop\crud-backend-main\node_modules\express\lib\router\index.js:281:22
+    at Function.process_params (C:\Users\user\Desktop\crud-backend-main\node_modules\express\lib\router\index.js:335:12)
+    at next (C:\Users\user\Desktop\crud-backend-main\node_modules\express\lib\router\index.js:275:10)
+    at Function.handle (C:\Users\user\Desktop\crud-backend-main\node_modules\express\lib\router\index.js:174:3)
+3/18/2021, 5:03:24 PM error: столбец "id2" не существует
+3/18/2021, 5:03:58 PM info: Server is running on port 8080.
+3/18/2021, 5:04:00 PM error: 500 TypeError: Cannot read property 'password' of undefined
+    at Object.exports.login (C:\Users\user\Desktop\crud-backend-main\app\services\user.services.js:85:38)
+    at exports.login (C:\Users\user\Desktop\crud-backend-main\app\controllers\user.controller.js:48:16)
+    at Layer.handle [as handle_request] (C:\Users\user\Desktop\crud-backend-main\node_modules\express\lib\router\layer.js:95:5)
+    at next (C:\Users\user\Desktop\crud-backend-main\node_modules\express\lib\router\route.js:137:13)
+    at Route.dispatch (C:\Users\user\Desktop\crud-backend-main\node_modules\express\lib\router\route.js:112:3)
+    at Layer.handle [as handle_request] (C:\Users\user\Desktop\crud-backend-main\node_modules\express\lib\router\layer.js:95:5)
+    at C:\Users\user\Desktop\crud-backend-main\node_modules\express\lib\router\index.js:281:22
+    at Function.process_params (C:\Users\user\Desktop\crud-backend-main\node_modules\express\lib\router\index.js:335:12)
+    at next (C:\Users\user\Desktop\crud-backend-main\node_modules\express\lib\router\index.js:275:10)
+    at Function.handle (C:\Users\user\Desktop\crud-backend-main\node_modules\express\lib\router\index.js:174:3)
+3/18/2021, 5:04:00 PM error: столбец "id2" не существует
+3/18/2021, 5:04:33 PM info: Server is running on port 8080.
+3/18/2021, 5:05:46 PM info: Server is running on port 8080.
+3/18/2021, 5:06:02 PM info: Server is running on port 8080.
+3/18/2021, 5:06:12 PM info: Server is running on port 8080.
+3/18/2021, 5:06:24 PM info: Server is running on port 8080.
+3/18/2021, 5:06:34 PM info: Server is running on port 8080.
+3/18/2021, 5:07:06 PM info: Server is running on port 8080.
+3/18/2021, 5:07:39 PM info: Server is running on port 8080.
+3/18/2021, 5:07:41 PM error: столбец "id2" не существует
+3/18/2021, 5:07:56 PM info: Server is running on port 8080.
+3/18/2021, 5:07:57 PM error: WHERE parameter "email" has invalid "undefined" value
+3/18/2021, 5:08:19 PM info: Server is running on port 8080.
+3/18/2021, 5:09:42 PM info: Server is running on port 8080.
+3/18/2021, 5:10:09 PM error: Cannot read property 'dataValues' of null
+3/18/2021, 5:10:37 PM info: Server is running on port 8080.
+3/18/2021, 5:11:45 PM info: Server is running on port 8080.
+3/18/2021, 5:11:47 PM error: Cannot read property 'dataValues' of null
+3/18/2021, 5:12:01 PM info: Server is running on port 8080.
+3/18/2021, 5:12:21 PM info: Server is running on port 8080.
+3/18/2021, 5:12:34 PM info: Server is running on port 8080.
+3/18/2021, 5:12:50 PM info: Server is running on port 8080.
+3/18/2021, 5:13:05 PM info: Server is running on port 8080.
+3/18/2021, 5:13:05 PM error: cx is not defined
+3/18/2021, 5:14:06 PM info: Server is running on port 8080.
+3/18/2021, 5:14:11 PM info: Server is running on port 8080.
+3/18/2021, 5:14:12 PM error: undefined
+3/18/2021, 5:14:22 PM error: undefined
+3/18/2021, 5:14:58 PM info: Server is running on port 8080.
+3/18/2021, 5:14:59 PM error: 1 [object SequelizeInstance:user]
+3/18/2021, 5:15:11 PM info: Server is running on port 8080.
+3/18/2021, 5:15:15 PM error: 12222 [object SequelizeInstance:user]
+3/18/2021, 5:15:42 PM info: Server is running on port 8080.
+3/18/2021, 5:15:43 PM error: undefined
+3/18/2021, 5:16:11 PM info: Server is running on port 8080.
+3/18/2021, 5:16:12 PM error: promise lol
+3/18/2021, 5:16:27 PM info: Server is running on port 8080.
+3/18/2021, 5:16:35 PM info: Server is running on port 8080.
+3/18/2021, 5:16:44 PM info: Server is running on port 8080.
+3/18/2021, 5:16:49 PM info: Server is running on port 8080.
+3/18/2021, 5:18:08 PM info: Server is running on port 8080.
+3/18/2021, 5:21:11 PM info: Server is running on port 8080.
+3/18/2021, 5:21:21 PM info: Server is running on port 8080.
+3/18/2021, 5:22:56 PM error: 400 Error: email admin@t2est.com does not exist
+    at Object.exports.login (C:\Users\user\Desktop\crud-backend-main\app\services\user.services.js:80:23)
+    at processTicksAndRejections (internal/process/task_queues.js:93:5)
+3/18/2021, 5:23:21 PM error: 500 Error: email already in use, maybe you need login
+    at Object.exports.reg (C:\Users\user\Desktop\crud-backend-main\app\services\user.services.js:34:19)
+    at processTicksAndRejections (internal/process/task_queues.js:93:5)
+3/18/2021, 5:24:17 PM info: Server is running on port 8080.
+3/18/2021, 5:24:25 PM error: 400 Error: email already in use, maybe you need login
+    at Object.exports.reg (C:\Users\user\Desktop\crud-backend-main\app\services\user.services.js:34:23)
+    at processTicksAndRejections (internal/process/task_queues.js:93:5)
+3/18/2021, 5:25:18 PM info: Server is running on port 8080.
