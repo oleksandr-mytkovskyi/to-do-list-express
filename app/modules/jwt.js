@@ -62,7 +62,6 @@ exports.checkToken = (token, options) => {
                 break;
         }
         const decoded = jwt.verify(token, signature);
-        console.log(decoded);
         return decoded;
     } catch (e) {
         return false;

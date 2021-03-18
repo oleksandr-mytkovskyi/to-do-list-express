@@ -6,9 +6,6 @@ const errorMiddleware = ((error, req, res, next) => {
     res.json({
       status: error.status,
       message: error.message,
-      // stack: error.stack
     });
-    console.log('Error status: ', error.status)
-    console.log('Message: ', error.message)
   });
   module.exports = errorMiddleware;
