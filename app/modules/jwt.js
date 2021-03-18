@@ -1,6 +1,6 @@
 const jwt = require('jsonwebtoken');
 const fs = require('fs');
-const publicUrlA = 'C:/Users/user/Desktop/crud-backend-main/publicKeyA';
+const publicUrlA = process.env.ENVIROMENT === 'production' ? 'some' : 'C:/Users/user/Desktop/crud-backend-main/publicKeyA';
 const privatUrlA = 'C:/Users/user/Desktop/crud-backend-main/privatKeyA';
 const publicUrlR = 'C:/Users/user/Desktop/crud-backend-main/publicKeyR';
 const privatUrlR = 'C:/Users/user/Desktop/crud-backend-main/privatKeyR';

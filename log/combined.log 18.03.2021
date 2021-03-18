@@ -241,3 +241,6 @@
     at Object.exports.reg (C:\Users\user\Desktop\crud-backend-main\app\services\user.services.js:34:23)
     at processTicksAndRejections (internal/process/task_queues.js:93:5)
 3/18/2021, 5:25:18 PM info: Server is running on port 8080.
+3/18/2021, 5:31:27 PM info: Server is running on port 8080.
+3/18/2021, 5:39:39 PM info: Server is running on port 8080.
+3/18/2021, 5:43:27 PM info: Server is running on port 8080.
