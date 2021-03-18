@@ -1,9 +1,9 @@
 const jwt = require('jsonwebtoken');
 const fs = require('fs');
-const publicUrlA = process.env.ENVIROMENT === 'production' ? 'some' : 'C:/Users/user/Desktop/crud-backend-main/publicKeyA';
-const privatUrlA = 'C:/Users/user/Desktop/crud-backend-main/privatKeyA';
-const publicUrlR = 'C:/Users/user/Desktop/crud-backend-main/publicKeyR';
-const privatUrlR = 'C:/Users/user/Desktop/crud-backend-main/privatKeyR';
+const publicUrlA = process.env.ENVIROMENT === 'production' ? process.env.publicKeyA : 'C:/Users/user/Desktop/crud-backend-main/publicKeyA';
+const privatUrlA = process.env.ENVIROMENT === 'production' ? process.env.privatKeyA : 'C:/Users/user/Desktop/crud-backend-main/privatKeyA';
+const publicUrlR = process.env.ENVIROMENT === 'production' ? process.env.publicKeyR : 'C:/Users/user/Desktop/crud-backend-main/publicKeyR';
+const privatUrlR = process.env.ENVIROMENT === 'production' ? process.env.privatKeyR : 'C:/Users/user/Desktop/crud-backend-main/privatKeyR';
 exports.getKey = (url) => {
     return fs.readFileSync(url, 'utf8');   
 }
