@@ -23,7 +23,7 @@ const refreshTokens = async (id, email, userName, roleId) => {
 
 }
 
-exports.reg = async (req, res) => {
+exports.reg = async (req, res, next) => {
     try {
         const {email, password, userName} = req.body;
         const data = await User.findOne({
@@ -31,7 +31,9 @@ exports.reg = async (req, res) => {
             where: { email: email}
         });
         if(data) {
-            throw new Error('email already in use, maybe you need login');
+            const e = new Error('email already in use, maybe you need login');
+            e.status = 400;
+            throw e;
         }
         // bcrypt
         bcrypt.hash(password, saltRounds, async function (err, hash) {
@@ -55,34 +57,31 @@ exports.reg = async (req, res) => {
                     refreshToken: refreshToken
                 }
                 RefreshToken.create(fieldToken);
-
                 res.send({
                     sucess: true,
                     accessToken,
                     refreshToken,
                 });
             } catch (e) {
-                res.status(400).send({
-                    message: e.message
-                })
+                next(e);
             }
         });
         
     } catch(e) {
-        res.status(400).send({
-            message: e.message || "invalid registration"
-        });
+        next(e);
     }
 }  
 
-exports.login = async (req, res) => {
+exports.login = async (req, res, next) => {
     try {
         const data = await User.findOne({
             attributes: ['id', 'email', 'userName', 'password', 'roleId'],
             where: { email: req.body.email}
         });
         if (!data) {
-            throw new Error(`email ${req.body.email} does not exist`)
+            const e = new Error(`email ${req.body.email} does not exist`)
+            e.status = 400;
+            throw e; 
         }
         const hash = data.dataValues.password;
         const {id, email, userName, roleId} = data.dataValues;
@@ -93,39 +92,34 @@ exports.login = async (req, res) => {
                     throw new Error('Error in hash callback on Login');
                 }
                 if(!result) {
-                    throw new Error('Password incorect'); 
+                    const e = new Error('Password incorect');
+                    e.status = 400;
+                    throw e; 
                 }
                 const obj = await refreshTokens(id, email, userName, roleId);
                 res.send(obj);   
             } catch(e) {
-                res.status(500).send({
-                    message: e.message
-                });
+                next(e);
             }
         });
 
     } catch(e) {
-        res.status(500).send({
-            message: e.message || 'invalid login'
-        });
+        next(e);
     }
 }
-exports.refresh = async (req, res) => {
+exports.refresh = async (req, res, next) => {
     try {
         const {refreshToken} = req.body;
         const parseToken = jwt.checkToken(refreshToken,  {type: "refresh"});
         if(!parseToken) {
-            throw new Error('Refresh token not valid');
+            const e = new Error('Refresh token not valid');
+            e.status = 400;
+            throw e;
         }
         const {id, email, userName, roleId} = parseToken;
         const obj = await refreshTokens(id, email, userName, roleId);
         res.send(obj);   
-
-
     } catch(e) {
-        res.status(400).send({
-            message: e.message
-        })
+        next(e);
     }
-
 }

@@ -1,7 +1,7 @@
 const listServices = require("../services/list.services");
 
 // Create and Save a new List
-exports.add = (req, res) => {
+exports.add = (req, res, next) => {
   res.set('Access-Control-Allow-Origin', '*');
   // Validate request
   if (!req.body.name) {
@@ -10,24 +10,24 @@ exports.add = (req, res) => {
     });
     return;
   }
-  listServices.add(req, res);
+  listServices.add(req, res, next);
 };
 
 // Retrieve all Lists from the database.
-exports.get = (req, res) => {
+exports.get = (req, res, next) => {
   res.set('Access-Control-Allow-Origin', '*');
   const query = req.query;
-  listServices.get(req, res, query);
+  listServices.get(req, res, next, query);
 };
 
-exports.getById = (req, res) => {
+exports.getById = (req, res, next) => {
   res.set('Access-Control-Allow-Origin', '*');
   const id = req.params.id;
-  listServices.getById(req, res, id);
+  listServices.getById(req, res, next, id);
 };
 
 // Update a List by the id in the request
-exports.update = (req, res) => {
+exports.update = (req, res, next) => {
   res.set('Access-Control-Allow-Origin', '*');
   const id = req.params.id;
   if(!id) {
@@ -36,11 +36,11 @@ exports.update = (req, res) => {
     });
     return;
   }
-  listServices.updata(req, res, id); 
+  listServices.updata(req, res, next, id); 
 };
 
 // Delete a List with the specified id in the request
-exports.delete = (req, res) => {
+exports.delete = (req, res, next) => {
   res.set('Access-Control-Allow-Origin', '*');
   const id = req.params.id;
   if(!id) {
@@ -49,10 +49,10 @@ exports.delete = (req, res) => {
     });
     return;
   }
-  listServices.delete(req, res, id);
+  listServices.delete(req, res, next, id);
 };
 
-exports.addToTrash = (req, res) => {
+exports.addToTrash = (req, res, next) => {
   res.set('Access-Control-Allow-Origin', '*');
   const id = req.params.id;
   if(!id) {
@@ -61,10 +61,10 @@ exports.addToTrash = (req, res) => {
     });
     return;
   }
-  listServices.addToTrash(req, res, id);
+  listServices.addToTrash(req, res, next, id);
 };
 
-exports.removeToTrash = (req, res) => {
+exports.removeToTrash = (req, res, next) => {
   res.set('Access-Control-Allow-Origin', '*');
   const id = req.params.id;
   if(!id) {
@@ -73,7 +73,7 @@ exports.removeToTrash = (req, res) => {
     });
     return;
   }
-  listServices.removeToTrash(req, res, id);
+  listServices.removeToTrash(req, res, next, id);
 };
 
 

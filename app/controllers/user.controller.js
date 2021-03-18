@@ -3,11 +3,12 @@ const regexpUpperCase = /[A-Z]/g;
 const regexpLowerCase = /[a-z]/g;
 const regexpNumber = /[0-9]/g;
 
-exports.reg = async (req, res) => {
+exports.reg = async (req, res, next) => {
   const {email, password, userName} = req.body;
   res.set('Access-Control-Allow-Origin', '*');
   try {
-    // чи треба додаткову валідацію на емейл ?
+    //помилки з сторони сервера, в логи впринципі писати не потрібно
+    //тому тут використовується локальний обробник помилок
     if(!email) {
       throw new Error('email is empty');
     }
@@ -28,7 +29,7 @@ exports.reg = async (req, res) => {
       throw new Error('password does not contain a number');
     }
     
-    userServices.reg(req, res);
+    userServices.reg(req, res, next);
 
   } catch(e) {
     res.status(400).send({
@@ -37,7 +38,7 @@ exports.reg = async (req, res) => {
   }
 }
 
-exports.login = (req, res) => {
+exports.login = (req, res, next) => {
   res.set('Access-Control-Allow-Origin', '*');
   // Validate request
   if (!req.body.email || !req.body.password) {
@@ -46,10 +47,10 @@ exports.login = (req, res) => {
     });
     return;
   }
-  userServices.login(req, res);
+  userServices.login(req, res, next);
 };
 
-exports.refresh = (req, res) => {
+exports.refresh = (req, res, next) => {
   res.set('Access-Control-Allow-Origin', '*');
   // Validate request
   if (!req.body.refreshToken) {
@@ -58,8 +59,5 @@ exports.refresh = (req, res) => {
     });
     return;
   }
-  userServices.refresh(req, res);
+  userServices.refresh(req, res, next);
 };
-
-
-
