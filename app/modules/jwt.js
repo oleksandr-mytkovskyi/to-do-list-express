@@ -8,11 +8,11 @@ exports.getKey = (url) => {
     return fs.readFileSync(url, 'utf8');   
 }
 
-const publickKeyAccess = process.env.ENVIROMENT === 'production' ? process.env.publicKeyA : this.getKey(publicUrlA);
-const privatKeyAccess = process.env.ENVIROMENT === 'production' ? process.env.privatKeyA : this.getKey(privatUrlA);
+const publickKeyAccess = process.env.publicKeyA ? process.env.publicKeyA : this.getKey(publicUrlA);
+const privatKeyAccess = process.env.publicKeyA ? process.env.privatKeyA : this.getKey(privatUrlA);
 
-const publickKeyRefresh = process.env.ENVIROMENT === 'production' ? process.env.publicKeyR : this.getKey(publicUrlR);
-const privatKeyRefresh = process.env.ENVIROMENT === 'production' ? process.env.privatKeyR : this.getKey(privatUrlR);
+const publickKeyRefresh = process.env.publicKeyA ? process.env.publicKeyR : this.getKey(publicUrlR);
+const privatKeyRefresh = process.env.publicKeyA ? process.env.privatKeyR : this.getKey(privatUrlR);
 
 exports.createToken = async (id, email, userName, roleId, options) => {
     let signature = null;

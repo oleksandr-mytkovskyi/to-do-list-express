@@ -7,19 +7,19 @@ module.exports = {
       name: 'admin',
       createdAt: new Date(),
       updatedAt: new Date()
-    }]);
-
-    await queryInterface.bulkInsert('Roles', [{
+    },
+    {
       name: 'editor',
       createdAt: new Date(),
       updatedAt: new Date()
-    }]);
-
-    await queryInterface.bulkInsert('Roles', [{
-      name: 'view',
+    },
+    {
+      name: 'viewer',
       createdAt: new Date(),
       updatedAt: new Date()
-    }]);
+    }
+  ]);
+
     /**
      * Add seed commands here.
      *

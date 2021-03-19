@@ -1,19 +1,16 @@
 const express = require("express");
-// const bodyParser = require("body-parser");
 const cors = require("cors");
 const winston = require("./app/utils/logger");
 const errorMiddleware = require('./app/middleware/error.middleware');
 const app = express();
+const db = require("./app/models");
 
 app.use(cors());
 
-// parse requests of content-type - application/json
 app.use(express.json());
 
-// parse requests of content-type - application/x-www-form-urlencoded
 app.use(express.urlencoded({ extended: true }));
 
-const db = require("./app/models");
 db.sequelize.sync();
 
 app.get("/", (req, res) => {
@@ -24,7 +21,6 @@ require("./app/routes/list.routes")(app);
 require("./app/routes/user.routes")(app);
 
 app.use(errorMiddleware);
-
 
 // помилки в промісах
 process.on('unhandledRejection', (reason, promise) => {

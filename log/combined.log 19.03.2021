@@ -1,0 +1,44 @@
+3/19/2021, 3:16:56 PM info: Server is running on port 8080.
+3/19/2021, 3:19:02 PM info: Server is running on port 8080.
+3/19/2021, 3:19:51 PM info: Server is running on port 8080.
+3/19/2021, 3:20:44 PM info: Server is running on port 8080.
+3/19/2021, 3:21:15 PM info: Server is running on port 8080.
+3/19/2021, 3:22:08 PM info: Server is running on port 8080.
+3/19/2021, 3:23:28 PM info: Server is running on port 8080.
+3/19/2021, 3:24:19 PM info: Server is running on port 8080.
+3/19/2021, 3:29:51 PM info: Server is running on port 8080.
+3/19/2021, 3:31:07 PM info: Server is running on port 8080.
+3/19/2021, 3:33:58 PM info: Server is running on port 8080.
+3/19/2021, 3:35:42 PM info: Server is running on port 8080.
+3/19/2021, 3:36:06 PM info: Server is running on port 8080.
+3/19/2021, 3:36:41 PM info: Server is running on port 8080.
+3/19/2021, 3:36:57 PM info: Server is running on port 8080.
+3/19/2021, 3:37:04 PM info: Server is running on port 8080.
+3/19/2021, 3:37:19 PM error: 401 Error: you does not have permision
+    at C:\Users\user\Desktop\crud-backend-main\app\middleware\access.middleware.js:6:28
+    at Layer.handle [as handle_request] (C:\Users\user\Desktop\crud-backend-main\node_modules\express\lib\router\layer.js:95:5)
+    at next (C:\Users\user\Desktop\crud-backend-main\node_modules\express\lib\router\route.js:137:13)
+    at Route.dispatch (C:\Users\user\Desktop\crud-backend-main\node_modules\express\lib\router\route.js:112:3)
+    at Layer.handle [as handle_request] (C:\Users\user\Desktop\crud-backend-main\node_modules\express\lib\router\layer.js:95:5)
+    at C:\Users\user\Desktop\crud-backend-main\node_modules\express\lib\router\index.js:281:22
+    at Function.process_params (C:\Users\user\Desktop\crud-backend-main\node_modules\express\lib\router\index.js:335:12)
+    at next (C:\Users\user\Desktop\crud-backend-main\node_modules\express\lib\router\index.js:275:10)
+    at Function.handle (C:\Users\user\Desktop\crud-backend-main\node_modules\express\lib\router\index.js:174:3)
+    at router (C:\Users\user\Desktop\crud-backend-main\node_modules\express\lib\router\index.js:47:12)
+3/19/2021, 3:37:21 PM error: 401 Error: you does not have permision
+    at C:\Users\user\Desktop\crud-backend-main\app\middleware\access.middleware.js:6:28
+    at Layer.handle [as handle_request] (C:\Users\user\Desktop\crud-backend-main\node_modules\express\lib\router\layer.js:95:5)
+    at next (C:\Users\user\Desktop\crud-backend-main\node_modules\express\lib\router\route.js:137:13)
+    at Route.dispatch (C:\Users\user\Desktop\crud-backend-main\node_modules\express\lib\router\route.js:112:3)
+    at Layer.handle [as handle_request] (C:\Users\user\Desktop\crud-backend-main\node_modules\express\lib\router\layer.js:95:5)
+    at C:\Users\user\Desktop\crud-backend-main\node_modules\express\lib\router\index.js:281:22
+    at Function.process_params (C:\Users\user\Desktop\crud-backend-main\node_modules\express\lib\router\index.js:335:12)
+    at next (C:\Users\user\Desktop\crud-backend-main\node_modules\express\lib\router\index.js:275:10)
+    at Function.handle (C:\Users\user\Desktop\crud-backend-main\node_modules\express\lib\router\index.js:174:3)
+    at router (C:\Users\user\Desktop\crud-backend-main\node_modules\express\lib\router\index.js:47:12)
+3/19/2021, 3:39:17 PM info: Server is running on port 8080.
+3/19/2021, 3:45:49 PM info: Server is running on port 8080.
+3/19/2021, 3:46:17 PM info: Server is running on port 8080.
+3/19/2021, 3:47:51 PM info: Server is running on port 8080.
+3/19/2021, 3:54:32 PM info: Server is running on port 8080.
+3/19/2021, 3:54:44 PM info: Server is running on port 8080.
