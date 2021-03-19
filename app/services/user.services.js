@@ -1,4 +1,4 @@
-const db = require("../models");
+const db = require('../models');
 const jwt = require('../modules/jwt');
 const bcrypt = require('bcrypt');
 const saltRounds = 10;
@@ -110,7 +110,7 @@ exports.login = async (req, res, next) => {
 exports.refresh = async (req, res, next) => {
     try {
         const {refreshToken} = req.body;
-        const parseToken = jwt.checkToken(refreshToken,  {type: "refresh"});
+        const parseToken = jwt.checkToken(refreshToken,  {type: 'refresh'});
         if(!parseToken) {
             const e = new Error('Refresh token not valid');
             e.status = 400;

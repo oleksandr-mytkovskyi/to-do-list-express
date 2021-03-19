@@ -1,4 +1,4 @@
-const userServices = require("../services/user.services");
+const userServices = require('../services/user.services');
 const regexpUpperCase = /[A-Z]/g;
 const regexpLowerCase = /[a-z]/g;
 const regexpNumber = /[0-9]/g;
@@ -43,7 +43,7 @@ exports.login = (req, res, next) => {
   // Validate request
   if (!req.body.email || !req.body.password) {
     res.status(400).send({
-      message: "Invalid login or password"
+      message: 'Invalid login or password'
     });
     return;
   }
@@ -55,7 +55,7 @@ exports.refresh = (req, res, next) => {
   // Validate request
   if (!req.body.refreshToken) {
     res.status(400).send({
-      message: "refreshToken not found"
+      message: 'refreshToken not found'
     });
     return;
   }

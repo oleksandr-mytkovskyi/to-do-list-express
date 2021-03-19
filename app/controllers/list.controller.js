@@ -1,4 +1,4 @@
-const listServices = require("../services/list.services");
+const listServices = require('../services/list.services');
 
 // Create and Save a new List
 exports.add = (req, res, next) => {
@@ -6,7 +6,7 @@ exports.add = (req, res, next) => {
   // Validate request
   if (!req.body.name) {
     res.status(400).send({
-      message: "Content can not be empty!"
+      message: 'Content can not be empty!'
     });
     return;
   }
@@ -32,7 +32,7 @@ exports.update = (req, res, next) => {
   const id = req.params.id;
   if(!id) {
     res.send({
-      message: "Not found id for updata "
+      message: 'Not found id for updata '
     });
     return;
   }
@@ -45,7 +45,7 @@ exports.delete = (req, res, next) => {
   const id = req.params.id;
   if(!id) {
     res.send({
-      message: "Not found id for delete "
+      message: 'Not found id for delete '
     });
     return;
   }
@@ -57,7 +57,7 @@ exports.addToTrash = (req, res, next) => {
   const id = req.params.id;
   if(!id) {
     res.send({
-      message: "Not found id for delete "
+      message: 'Not found id for delete '
     });
     return;
   }
@@ -69,7 +69,7 @@ exports.removeToTrash = (req, res, next) => {
   const id = req.params.id;
   if(!id) {
     res.send({
-      message: "Not found id for delete"
+      message: 'Not found id for delete'
     });
     return;
   }

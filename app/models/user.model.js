@@ -1,5 +1,5 @@
 module.exports = (sequelize, Sequelize) => {
-    const User = sequelize.define("user", {
+    const User = sequelize.define('user', {
       id: {
         type: Sequelize.INTEGER,
         autoIncrement: true,
@@ -21,9 +21,5 @@ module.exports = (sequelize, Sequelize) => {
         defaultValue: 3
       },
     }); 
-  
-    // User.associate = function(models) {
-    //   User.belongsTo(models.role, {foreignKey: 'roleId', as: 'id'});
-    // };
     return User;
   };

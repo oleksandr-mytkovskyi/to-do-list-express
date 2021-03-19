@@ -1,4 +1,4 @@
-const db = require("../models");
+const db = require('../models');
 const List = db.list;
 let timerDelete = new Map();
 
@@ -63,7 +63,7 @@ exports.updata = async (req, res, next, id) => {
             return;
         }
         res.send({
-            message: "List was updated successfully.",
+            message: 'List was updated successfully.',
             id: id
         })
     } catch (e) {
@@ -109,7 +109,7 @@ exports.addToTrash = async (req, res, next, id) => {
             return;
         }
         res.send({
-            message: "List was deleted successfully!",
+            message: 'List was deleted successfully!',
             id: id
         });
         let timerId = setTimeout(() => {
@@ -140,7 +140,7 @@ exports.removeToTrash = async (req, res, next, id) => {
             return;
         }
         res.send({
-            message: "List was recovery successfully!",
+            message: 'List was recovery successfully!',
             id: id
         });
     } catch (e) {
