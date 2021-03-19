@@ -14,7 +14,21 @@ const privatKeyAccess = process.env.ENVIROMENT === 'production' ? process.env.pr
 const publickKeyRefresh = process.env.ENVIROMENT === 'production' ? process.env.publicKeyR : this.getKey(publicUrlR);
 const privatKeyRefresh = process.env.ENVIROMENT === 'production' ? process.env.privatKeyR : this.getKey(privatUrlR);
 
-exports.createAccessToken = async (id, email, userName, roleId) => {
+exports.createToken = async (id, email, userName, roleId, options) => {
+    let signature = null;
+    let expiresIn = null;
+    switch (options.type) {
+        case 'access':
+            signature = privatKeyAccess;
+            expiresIn = '1h';
+            break;
+        case 'refresh':
+            signature = privatKeyRefresh;
+            expiresIn = '30d';
+            break;
+        default:
+            break;
+    }
     return jwt.sign(
         { 
             id,
@@ -22,27 +36,10 @@ exports.createAccessToken = async (id, email, userName, roleId) => {
             userName,
             roleId
         },
-        privatKeyAccess,
+        signature,
         {   
             algorithm: 'RS256',
-            expiresIn: '1h' ,
-            issuer:  'skysoft-tech',
-        },
-      );
-}
-
-exports.createRefreshToken = async (id, email, userName, roleId) => {
-    return jwt.sign(
-        { 
-            id,
-            email,
-            userName,
-            roleId
-        },
-        privatKeyRefresh,
-        {   
-            algorithm: 'RS256',
-            expiresIn: '30d' ,
+            expiresIn: expiresIn ,
             issuer:  'skysoft-tech',
         },
       );

@@ -1,13 +1,15 @@
 const db = require('../models');
 const jwt = require('../modules/jwt');
 const bcrypt = require('bcrypt');
+const roles = require('../constants/roles');
 const saltRounds = 10;
 const User = db.user;
 const RefreshToken = db.refreshToken;
+const {viewer} = roles;
 
 const refreshTokens = async (id, email, userName, roleId) => {
-    const newAccessToken = await jwt.createAccessToken(id, email, userName, roleId);
-    const newRefreshToken = await jwt.createRefreshToken(id, email, userName, roleId);
+    const newAccessToken = await jwt.createToken(id, email, userName, roleId, {type: 'access'});
+    const newRefreshToken = await jwt.createToken(id, email, userName, roleId, {type: 'refresh'});
     
     const fieldToken = {
         refreshToken: newRefreshToken
@@ -49,8 +51,8 @@ exports.reg = async (req, res, next) => {
                 const data = await User.create(field);
                 const id = data.dataValues.id;
           
-                const accessToken = await jwt.createAccessToken(id, email, userName, 3);
-                const refreshToken = await jwt.createRefreshToken(id, email, userName, 3);
+                const accessToken = await jwt.createToken(id, email, userName, viewer, {type: 'access'});
+                const refreshToken = await jwt.createToken(id, email, userName, viewer, {type: 'refresh'});
 
                 const fieldToken = {
                     userId: id,
