@@ -1,6 +1,6 @@
 const jwt = require('../modules/jwt');
 
-exports.jwtMiddleWare = async (req, res, next) => {
+const jwtMiddleWare = async (req, res, next) => {
     try {
         const authData = req.headers.authorization;
         if(!authData) {
@@ -19,3 +19,4 @@ exports.jwtMiddleWare = async (req, res, next) => {
         })
     }
 }
+module.exports = jwtMiddleWare;

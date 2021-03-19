@@ -1,4 +1,4 @@
-exports.accessMiddleWareFactory = (...allowedRoleIds) => async (req, res, next) => {
+const accessMiddleWareFactory = (...allowedRoleIds) => async (req, res, next) => {
     try {
         if(allowedRoleIds.includes(req.roleId)) {
             next();
@@ -11,3 +11,4 @@ exports.accessMiddleWareFactory = (...allowedRoleIds) => async (req, res, next) 
         next(e);
     }
 }
+module.exports = accessMiddleWareFactory;
