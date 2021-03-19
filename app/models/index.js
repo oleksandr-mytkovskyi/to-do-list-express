@@ -6,7 +6,7 @@ dotenv.config();
 const sequelize = new Sequelize(process.env.DB, process.env.USER, process.env.PASSWORD, {
   host: process.env.HOST,
   dialect: process.env.DIALECT,
-  operatorsAliases: false,
+  operatorsAliases: 0,
   // dialectOptions: {
   //   ssl: {
   //     require: true, // This will help you. But you will see nwe error
