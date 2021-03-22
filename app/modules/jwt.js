@@ -1,19 +1,21 @@
 const jwt = require('jsonwebtoken');
 const fs = require('fs');
-const publicUrlA = 'C:/Users/user/Desktop/crud-backend-main/publicKeyA';
-const privatUrlA = 'C:/Users/user/Desktop/crud-backend-main/privatKeyA';
-const publicUrlR = 'C:/Users/user/Desktop/crud-backend-main/publicKeyR';
-const privatUrlR = 'C:/Users/user/Desktop/crud-backend-main/privatKeyR';
+const path = require("path");
 
-exports.getKey = (url) => {
+const publicUrlA = path.resolve('./publicKeyA');
+const privatUrlA = path.resolve('./privatKeyA');
+const publicUrlR = path.resolve('./publicKeyR');
+const privatUrlR = path.resolve('./privatKeyR');
+
+const getKey = (url) => {
     return fs.readFileSync(url, 'utf8');   
 }
 
-const publickKeyAccess = process.env.publicKeyA ? process.env.publicKeyA : this.getKey(publicUrlA);
-const privatKeyAccess = process.env.publicKeyA ? process.env.privatKeyA : this.getKey(privatUrlA);
+const publickKeyAccess = process.env.publicKeyA ? process.env.publicKeyA : getKey(publicUrlA);
+const privatKeyAccess = process.env.publicKeyA ? process.env.privatKeyA : getKey(privatUrlA);
 
-const publickKeyRefresh = process.env.publicKeyA ? process.env.publicKeyR : this.getKey(publicUrlR);
-const privatKeyRefresh = process.env.publicKeyA ? process.env.privatKeyR : this.getKey(privatUrlR);
+const publickKeyRefresh = process.env.publicKeyA ? process.env.publicKeyR : getKey(publicUrlR);
+const privatKeyRefresh = process.env.publicKeyA ? process.env.privatKeyR : getKey(privatUrlR);
 
 exports.createToken = async (id, email, userName, roleId, options) => {
     let signature = null;
