@@ -1,9 +1,9 @@
 const express = require("express");
 const cors = require("cors");
-const winston = require("./app/utils/logger");
-const errorMiddleware = require('./app/middleware/error.middleware');
+const winston = require("./utils/logger");
+const errorMiddleware = require('./middleware/error.middleware');
 const app = express();
-const db = require("./app/models");
+const db = require("./models");
 
 app.use(cors());
 
@@ -17,8 +17,8 @@ app.get("/", (req, res) => {
   res.json({ message: "Welcome to crud application" });
 });
 
-require("./app/routes/list.routes")(app);
-require("./app/routes/user.routes")(app);
+require("./routes/list.routes")(app);
+require("./routes/user.routes")(app);
 
 app.use(errorMiddleware);
 

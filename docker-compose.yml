@@ -1,0 +1,31 @@
+version: "3.7"
+
+services:
+  app:
+    image: node:14.16.0-alpine3.10
+    command: sh -c "npm install && npm run dev"
+    ports:
+      - 3000:3000
+    working_dir: /app
+    volumes:
+      - ./:/app
+    environment:
+      POSTGRES__HOST: 5454
+      POSTGRES__USER: postgres
+      POSTGRES__PASSWORD: 12345
+      POSTGRES__DB: list
+      POSTGRES_HOST_AUTH_METHOD: trust
+
+  postgres:
+    image: postgres 
+    ports:
+      - 5454:5432
+    # volumes:
+    #   - todo-postgres-data:/var/lib/postgres
+    environment: 
+      POSTGRES__HOST: 5432
+      POSTGRES_PASSWORD: 12345
+      POSTGRES_DATABASE: list
+
+# volumes:
+#   todo-postgres-data:
