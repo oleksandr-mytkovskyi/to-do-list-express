@@ -1,19 +1,9 @@
-FROM node:14.16.0-alpine3.10
-RUN apk add --no-cache python g++ make
-RUN apk update && apk upgrade && apk add bash
+FROM node:14-alpine
 WORKDIR /app
-COPY . ./app
-RUN apk --no-cache add --virtual builds-deps build-base python
-RUN npm instal
+COPY package*.json ./
+RUN apk add --no-cache make gcc g++ python
+RUN npm install
+RUN npm rebuild bcrypt --build-from-source
+RUN apk del make gcc g++ python
+COPY ./ ./
 CMD ["node", "./app/server.js"]
-
-# FROM node:14.16.0-alpine3.10
-# RUN mkdir -p /app/node_modules && chown -R node:node /app/
-# WORKDIR /app
-# COPY package*.json .
-# USER node
-
-# RUN npm install
-# COPY --chown=node:node . .
-# EXPOSE 3000
-# CMD ["node", "./app/server.js"]
