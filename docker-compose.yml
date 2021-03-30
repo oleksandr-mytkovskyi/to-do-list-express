@@ -2,6 +2,9 @@ version: "3.7"
 
 services:
   app:
+    container_name: my_server
+    # networks:
+    #  - todolist-app
     build: .
     command: sh -c "npm install && npm run dev"
     ports:
@@ -13,17 +16,21 @@ services:
       POSTGRES__PASSWORD: 12345
       POSTGRES__DB: list
       POSTGRES_HOST_AUTH_METHOD: trust
+    restart: always
 
   postgres:
-    image: postgres 
-    ports:
-      - 5454:5432
-    volumes:
-      - todo-postgres-data:/var/lib/postgres/data
-    environment: 
-      POSTGRES__HOST: 5432
+    container_name: my_database
+    # networks:
+    #  - todolist-app
+    image: postgres
+    environment:
+      POSTGRES_USER: postgres
       POSTGRES_PASSWORD: 12345
       POSTGRES_DATABASE: list
+    ports: 
+      - '5454:5432'
+    volumes:
+      - todo-postgres-data:/var/lib/postgres/data
 
 volumes:
-  todo-postgres-data:
+  todo-postgres-data: 
